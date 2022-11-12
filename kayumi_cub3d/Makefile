@@ -7,7 +7,7 @@ SRCS		=	main.c \
 
 OBJS		= $(SRCS:%.c=%.o)
 
-#LIBFT		= ./libft/libft.a
+LIBFT		= ./libft/libft.a
 
 LIBMLX		= libmlx.a
 
@@ -20,16 +20,14 @@ RM			= rm -f
 all: $(NAME)
 
 $(NAME): $(OBJS)
-#$(MAKE) -C ./mlx_linux
-#$(MAKE) bonus -C ./libft
-#$(MAKE) -C ./ft_printf
-	$(CC) $(OBJS) $(CFLAGS) -lm -lz -o $(NAME)
+	$(MAKE) bonus -C ./libft
+	$(CC) $(OBJS) $(LIBFT) $(CFLAGS) -lm -lz -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 clean:
-#make clean -C ./libft
+	make clean -C ./libft
 #make clean -C ./mlx_linux
 #make clean -C ./ft_printf
 	$(RM) $(OBJS)
