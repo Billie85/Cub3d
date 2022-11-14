@@ -15,3 +15,9 @@ typedef struct s_map_info
 	size_t	height;
 	size_t	width;
 }t_map_info;
+
+typedef struct s_node
+{
+	struct s_node	*next;
+	char			*str;
+}t_node;
