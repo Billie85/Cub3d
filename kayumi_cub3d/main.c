@@ -1,62 +1,58 @@
 #include "cub3d.h"
 
-/* void	split_line(t_map_info *map)
-   {
-   int	i;
-   int	atoi_i;
-   char **str;
-
-   i = 0;
-   atoi_i = (int *)malloc(sizeof(int));
-   str = ft_split(map->line, '\n');
-   while (str[i] != NULL)
-   {
-   atoi_i[i] = ft_atoi(str[i]);
-   printf("%d\n", atoi_i[i]);
-   free(str[i]);
-   i++;
-   }
-   free(str);
-   } */
-
-int	find_zero(t_map_info *map)//0を見つけたらここに入る。
+char *remove_zero(char *str)
 {
-    int i;
+	size_t  i;
 
-    i = 0;
-    while(map->line[i] != '\0')
-    {
-        printf("%s\n", map->line);
-        i++;
-    }
-    printf("-----\n");
-}
-
-void	read_get_line_map(char *argv[], t_map_info *map)
-{
-    char    *strchr_line;
-
-	map->fd = open(argv[1], O_RDONLY);
-	while(1)
+	i = 0;
+	while (str[i] != '\0')
 	{
-		map->line = get_next_line(map->fd);
-		//printf("%s", line);
-		if (map->line == NULL)
-			break;
-            if (ft_strchr(map->line, ZERO)!= 0)
-            find_zero(map);
-            else
-            printf("not foud\n");
+		if (str[i] == '0')
+			return (str);
 	}
 }
 
 int main(int argc, char *argv[])
 {
 	t_map_info *map;
+	char **split;
+	char *find;
+	char *hoge;
+	char *check_wall;
+	int i;
 
+	i = 0;
 	map = (t_map_info *)malloc(sizeof(t_map_info));
-	read_get_line_map(argv, map);
-	free(map);
+	map->fd = open(argv[1], O_RDONLY);
+	map->line = get_next_line(map->fd);
+	while (map->line[i] != '\0')
+	{
+		if (map->line[i] != ' ' && map->line[i] != '1')
+		{
+			//printf("the map it's wrong\n");
+			break;
+		}
+		else
+			//printf("it's okay\n");
+		i++;
+	}
+	//free(map->line);
+
+    while(map->line)//map->line != NULL
+    {
+        i = 0;
+        while(map->line[i])
+        {
+            printf("%c", map->line[i]);fflush(stdout);
+            i++;
+        }
+        free(map->line);
+        map->line = get_next_line(map->fd);
+    }
+
 	close(map->fd);
-	return (0);
+    system("leaks cub3d");
+	return 0;
 }
+//一個ずつの情報を持つことができたから、
+//次は２次元配列にしてあげて上下横の情報を持たせたげる事から続ける
