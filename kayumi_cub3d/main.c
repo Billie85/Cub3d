@@ -27,24 +27,27 @@ int main(int argc, char *argv[])
 		i++;
 		max_height++;
 	}
-	printf("height %ld\n", max_height);
-	printf("width %ld\n", max_width);
+	/* printf("height %ld\n", max_height);
+	printf("width %ld\n", max_width); */
 
 //マップが大きいとちょっと文字化けするかも。
-	x = 0;
-	while (x < max_height)
+	y = 0;
+	while (y < max_height)
 	{
-		y = 0;
-		while(y < max_width)
+		x = 0;
+		while(x < max_width)
 		{
-			if (map->array_2d[x][y] == '0')
+			if (map->array_2d[y][x] == '0')
 			{
-				printf("IT'S 0\n");
+				printf("down [%c]\n", map->array_2d[y + 1][x]);//4
+				printf("up [%c]\n", map->array_2d[y - 1][x]);//2
+				printf("left [%c]\n", map->array_2d[y][x - 1]);//8
+				printf("right [%c]\n", map->array_2d[y][x + 1]);//5
 			}
-			printf("%c", map->array_2d[x][y]);fflush(stdout);
-			y++;
+			//printf("%c", map->array_2d[x][y]);fflush(stdout);
+			x++;
 		}
-		x++;
+		y++;
 	}
 	close(map->fd);
 	system("leaks cub3d");
