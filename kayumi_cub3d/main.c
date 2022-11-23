@@ -1,29 +1,5 @@
 #include "cub3d.h"
 
-size_t largest_word(char *s[100])
-{
-	size_t	i;
-	size_t	len;
-	size_t	longest;
-	size_t	j;
-
-	longest = ft_strlen(s[3]);
-	printf("%ld\n", longest);
-	 i = 1;
-	while(i < len)
-	{
-		len = ft_strlen(s[i]);
-		if (longest < len)
-		{
-			longest = len;
-			j = i;
-		}
-		i++;
-	}
-	//printf("%s", s[i]);
-	return(longest);
-}
-
 int main(int argc, char *argv[])
 {
 	t_map_info *map;
@@ -31,6 +7,8 @@ int main(int argc, char *argv[])
 	size_t len;
 	size_t max_width;
 	size_t max_height;
+	int	x;
+	int	y;
 	
 	i = 0;
 	len = 0;
@@ -49,19 +27,25 @@ int main(int argc, char *argv[])
 		i++;
 		max_height++;
 	}
-	for (int x = 0; x < max_height; x++)
+	printf("height %ld\n", max_height);
+	printf("width %ld\n", max_width);
+
+//マップが大きいとちょっと文字化けするかも。
+	x = 0;
+	while (x < max_height)
 	{
-		for(int y = 0; y < max_width -1; y++)
+		y = 0;
+		while(y < max_width)
 		{
-		/* 	if (map->array_2d[x][y] == '0')
+			if (map->array_2d[x][y] == '0')
 			{
-				printf("aaaaaaaaaaaa\n");
-			} */
-			printf("%c ", map->array_2d[x][y]);
+				printf("IT'S 0\n");
+			}
+			printf("%c", map->array_2d[x][y]);fflush(stdout);
+			y++;
 		}
-		printf("\n");
+		x++;
 	}
-		
 	close(map->fd);
 	system("leaks cub3d");
 	return 0;
