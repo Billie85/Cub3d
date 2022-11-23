@@ -7,9 +7,11 @@
 # include <string.h>
 
 #define ZERO '0'
+#define MAX_MAP_HEIGHT 500
 
 typedef struct s_map_info
 {
+	char	*array_2d[MAX_MAP_HEIGHT];
 	char	*line;
 	int		fd;
 	size_t	height;
