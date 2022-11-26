@@ -19,10 +19,8 @@ typedef struct s_map_info
 	char	*line;
 	char	**file;
 	int		fd;
+	size_t	height;
+	size_t	width;
+	size_t	max_width;
+	size_t	max_height;
 }t_map_info;
-
-typedef struct s_node
-{
-	struct s_node	*next;
-	char			*str;
-}t_node;
