@@ -1,19 +1,10 @@
 #include "cub3d.h"
 
-size_t	get_max_width(size_t len)
-{
-	size_t max_width;
-
-	max_width = 0;
-	if (len > max_width)
-		max_width = len;
-	return (max_width);
-}
-
-char **Array_2D(t_map_info *map)
+void	Array_2D(t_map_info *map)
 {
 	char **buff;
 	size_t	len;
+	size_t	i;
 
 	map->height = 0;
 	map->max_height = 0;
@@ -23,17 +14,34 @@ char **Array_2D(t_map_info *map)
 	while(map->line != NULL)
 	{
 		buff = map->array_2d;
-		map->array_2d = (char **)malloc(sizeof(char *) * (map->width + 2));
-		ft_memcpy(map->array_2d, buff, sizeof(char **) * map->width);
+		map->array_2d = (char **)malloc(sizeof(char *) * (map->height + 2));
+		ft_memcpy(map->array_2d, buff, sizeof(char **) * map->height);
 		free(buff);
-		map->array_2d[map->width] = map->line;
-		len = ft_strlen(map->array_2d[map->width]);
-		map->width++;
+		map->array_2d[map->height] = map->line;
+		map->height++;
 		map->max_height++;
+		len = ft_strlen(map->line);
+		if (len > map->max_width)
+			map->max_width = len;
 		map->line = get_next_line(map->fd);
-		map->max_width = get_max_width(len);
 	}
-	return (map->array_2d);
+	map->array_2d[map->height] = NULL;
+
+	printf("%d-----------------\n",__LINE__);
+	i = 0;
+	map->height = 0;
+	while (map->array_2d[i])
+	{
+		map->new_malloc = (char *)malloc(sizeof(char ) * map->max_width + 1);
+		ft_memset(map->new_malloc, '9', sizeof(char) * map->max_width);
+		ft_memcpy(map->new_malloc, map->array_2d[i], ft_strlen(map->array_2d[i]));
+		free(map->array_2d[i]);
+		map->array_2d[i] = map->new_malloc;
+		i++;
+	}
+	printf("------[%c]------\n", map->array_2d[0][14]);
+	printf("%d-----------------\n",__LINE__);fflush(stdout);
+	//return (map->new_malloc);
 }
 
 int main(int argc, char *argv[])
@@ -51,13 +59,15 @@ int main(int argc, char *argv[])
 	map->fd = open(argv[1], O_RDONLY);
 
 	map->array_2d = (char **)malloc(sizeof(char *));
-	array = Array_2D(map);
-	y = 0;
-	while(y < map->max_height)
+	Array_2D(map);
+	printf("max_height %ld\n", map->max_height);
+	printf("max_width %ld\n", map->max_width);
+	/* while(y < map->max_height)
 	{
 		x = 0;
 		while(x < map->max_width)
 		{
+			//一旦ヌルまでの文字列を数えてみる。
 			if (array[y][x] == '0')
 			{
 				if (array[DOWN][x] != ' ' && array[UP][x] != ' ' && array[y][LEFT] != ' ' && array[y][RIGHT] != ' ')
@@ -68,54 +78,16 @@ int main(int argc, char *argv[])
 					break;
 				}
 			}
+			printf("%c", array[y][x]);
 			x++;
 		}
 		printf("\n");
-		y++;
-	}
-	/* printf("max_width %ld\n", map->max_width);
-	printf("max_height %ld\n", map->max_height); */
-/* 	 y = 0;
-	while (array[y] < map->max_height)
-	{
-		x = 0;
-		while(array[x] < map->max_width)
-		{
-			if (map->array_2d[y][x] == '0')
-			{
-				if (map->array_2d[DOWN][x] != ' ' && map->array_2d[UP][x] != ' ' && map->array_2d[y][LEFT] != ' ' && map->array_2d[y][RIGHT] != ' ')
-					printf("it's okay!!!\n");
-				else
-				{
-					printf("ERROR!!\n");
-					break;
-				}
-			}
-			printf("%c\n", array[x][y]);fflush(stdout);
-			x++;
-		}
 		y++;
 	} */
 	close(map->fd);
 	system("leaks cub3d");
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //一個ずつの情報を持つことができたから、
 //次は２次元配列にしてあげて上下横の情報を持たせたげる事から続ける

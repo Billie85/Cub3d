@@ -15,6 +15,7 @@
 
 typedef struct s_map_info
 {
+	char	*new_malloc;
 	char	**array_2d;
 	char	*line;
 	char	**file;
