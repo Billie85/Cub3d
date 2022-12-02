@@ -1,11 +1,16 @@
 #include "cub3d.h"
 
-void	Array_2D(t_map_info *map) //2次元配列にしている。関数
+////2次元配列にしている。関数 -----------------------------------------------------------------
+void	Array_2D(t_map_info *map)
 {
 	char **buff;
 	size_t	len;
 	size_t	i;
 	size_t	len01;
+	size_t	topmost_y;
+	size_t	lowest_y;
+	size_t	left_x;
+	size_t	right_x;
 
 	map->height = 0;
 	map->max_height = 0;
@@ -28,15 +33,14 @@ void	Array_2D(t_map_info *map) //2次元配列にしている。関数
 	}
 	map->array_2d[map->height] = NULL;
 
-	//printf("%d-----------------\n",__LINE__);
 	i = 0;
 	map->height = 0;
 
+////改行を見つけたらヌル終端にしてあげてる。関数-----------------------------------------------------------------------
 	int x;
 	int y;
-
 	y = 0;
-	while (y < map->max_height)//改行を見つけたらヌル終端にしてあげてる。関数
+	while (y < map->max_height)
 	{
 		x = 0;
 		while (x < map->max_width)
@@ -48,18 +52,64 @@ void	Array_2D(t_map_info *map) //2次元配列にしている。関数
 		}
 		y++;
 	}
-	while (map->array_2d[i])//ここで四角の部分を整えてあげてる。関数
+	while (map->array_2d[i])//ここで四角の部分を整えてあげてる。関数---------------------------------------------
 	{
 		map->new_malloc = (char *)malloc(sizeof(char ) * map->max_width + 1);
-		ft_memset(map->new_malloc, '9', sizeof(char) * map->max_width);
+		ft_memset(map->new_malloc, ' ', sizeof(char) * map->max_width);
 		ft_memcpy(map->new_malloc, map->array_2d[i], ft_strlen(map->array_2d[i]));
 		free(map->array_2d[i]);
 		map->array_2d[i] = map->new_malloc;
-		printf("%s\n", map->array_2d[i]);
 		i++;
 	}
+//--------------------------------------------------------------------------------------------------------------------
+	//周りが1で囲まれているかどうかを確認する関数を作る。関数の中で１もしくは空白があった場合はOKにしてる。
+	//freeするエラー処理だったりもう少し書かないといけないかも。
+	x = 0;
+	topmost_y = 0;
+	lowest_y = map->max_height -1;
+	while (x < map->max_width)//start(0.0)->最後までマップの一番上を見てる。
+	{
+		if (map->array_2d[topmost_y][x] != '1' && map->array_2d[topmost_y][x] != ' ')
+		{
+			printf("ERROR001\n");
+			//break;
+		}
+		if (map->array_2d[lowest_y][x] != '1' && map->array_2d[lowest_y][x] != ' ')
+		{
+			printf("ERROR001002\n");
+			//break;
+		}
+		x++;
+	}
 
-	/* 
+	left_x = 0;
+	right_x = map->max_width -2;
+	y = 0;
+	while (y < map->max_height)
+	{
+		//printf("%ld\n", map->max_width -2);
+		//printf("right_x %c\n", map->array_2d[y][6]);
+;		//printf("%c", map->array_2d[y][right_x]);
+		if (map->array_2d[y][left_x] != '1' && map->array_2d[y][left_x] != ' ')
+		{
+			break;
+			printf("ERROR!!\n");
+
+		}
+		//printf("-----%c-----", map->array_2d[y][right_x]);
+		if (map->array_2d[y][right_x] != '1' && map->array_2d[y][right_x] != ' ')
+		{
+			break;
+			printf("ERROR!!\n");
+		}
+		y++;
+	}
+	
+
+/* 	while(y < map->max_height)//上下を見てくれる関数。--------------------------------------------------------------
+	{
+
+	}
 	   int	x = 0;
 	   int	y = 0;
 	   while(y < map->max_height)
