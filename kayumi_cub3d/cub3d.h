@@ -25,3 +25,12 @@ typedef struct s_map_info
 	size_t	max_width;
 	size_t	max_height;
 }t_map_info;
+
+typedef struct s_map_path
+{
+	char *NO;
+	char *SO;
+	char *WE;
+	char *EA;
+}t_map_path;
+
