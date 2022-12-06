@@ -2,6 +2,7 @@
 # include "mlx_linux/mlx.h" */
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
+#include <stdbool.h>
 # include <math.h>
 # include <stdio.h>
 # include <string.h>
@@ -24,13 +25,15 @@ typedef struct s_map_info
 	size_t	width;
 	size_t	max_width;
 	size_t	max_height;
+	size_t	x1;
+	size_t	y1;
 }t_map_info;
 
-typedef struct s_map_path
-{
-	char *NO;
-	char *SO;
-	char *WE;
-	char *EA;
-}t_map_path;
-
+void	map(size_t x, size_t y, t_map_info *map);
+void	Array_2D(t_map_info *map);
+void	check_inside_the_map(t_map_info *map);
+void	check_around_map(t_map_info *map);
+void	make_square(t_map_info * map);
+void	remove_new_line(t_map_info *map);
+char	*skip_direction(t_map_info *map);
+void	find_map_position(t_map_info *map);
