@@ -90,7 +90,7 @@ void	check_inside_the_map(t_map_info *map)
 	size_t	x;
 	size_t	y;
 
-	printf("[%c]\n", map->array_2d[1][1]);
+	//printf("[%c]\n", map->array_2d[1][1]);
 	y = 1;
 	while (y < map->max_height)
 	{
@@ -122,7 +122,6 @@ void	Array_2D(t_map_info *map)//2次元配列にしてあげてる
 	map->max_height = 0;
 	map->max_width = 0;
 	map->line = get_next_line(map->fd);
-
 	while(map->line != NULL)
 	{
 		buff = map->array_2d;
