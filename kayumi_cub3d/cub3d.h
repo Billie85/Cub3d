@@ -35,5 +35,5 @@ void	check_inside_the_map(t_map_info *map);
 void	check_around_map(t_map_info *map);
 void	make_square(t_map_info * map);
 void	remove_new_line(t_map_info *map);
-char	*skip_direction(t_map_info *map);
+void	check_map(t_map_info *map);
 void	find_map_position(t_map_info *map);

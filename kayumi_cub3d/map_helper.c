@@ -6,15 +6,18 @@ void	remove_new_line(t_map_info *map)//改行を見つけたらヌル終端に�
 	size_t	y;
 
 	y = 0;
-	while (y < map->max_height)
+	while (map->array_2d[y])
 	{
 		x = 0;
-		while (x < map->max_width)
+		while (map->array_2d[y][x])
 		{
 			if (map->array_2d[y][x] == '\n')
+			{
 				map->array_2d[y][x] = '\0';
+			}
 			x++;
 		}
+		//printf("%s", map->array_2d[y]);
 		y++;
 	}
 }
@@ -26,12 +29,16 @@ void	make_square(t_map_info * map)//ここで四角の部分を整えてあげ�
 	i = 0;
 	while (map->array_2d[i])
 	{
-		map->new_malloc = (char *)malloc(sizeof(char ) * map->max_width + 1);
-		ft_memset(map->new_malloc, ' ', sizeof(char) * map->max_width);
-		ft_memcpy(map->new_malloc, map->array_2d[i], ft_strlen(map->array_2d[i]));
-		free(map->array_2d[i]);
-		map->array_2d[i] = map->new_malloc;
-		i++;
+		if (ft_strncmp(map->array_2d[i], "1", 1) == 0 || ft_strncmp(map->array_2d[i], "0", 1) == 0)
+		{
+			map->new_malloc = (char *)malloc(sizeof(char ) * map->max_width + 1);
+			ft_memset(map->new_malloc, 'B', sizeof(char) * map->max_width);
+			ft_memcpy(map->new_malloc, map->array_2d[i], ft_strlen(map->array_2d[i]));
+			free(map->array_2d[i]);
+			map->array_2d[i] = map->new_malloc;
+			printf("%s\n", map->array_2d[i]);
+		}
+			i++;
 	}
 }
 
@@ -134,6 +141,8 @@ void	Array_2D(t_map_info *map)//2次元配列にしてあげてる
 		len = ft_strlen(map->line);
 		if (len > map->max_width)
 			map->max_width = len;
+		//一つの関数にできる。//もしもここでどれかなかった場合はbreakで終了してあげる。
+		//違う関数でmap->array2dに格納されている文字を比較する　1 || 0 || sp がどれかあればマップになる条件を作ってあげる。
 		map->line = get_next_line(map->fd);
 	}
 	map->array_2d[map->height] = NULL;
