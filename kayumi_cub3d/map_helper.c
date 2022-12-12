@@ -29,17 +29,23 @@ void	make_square(t_map_info * map)//ここで四角の部分を整えてあげ�
 	i = 0;
 	while (map->array_2d[i])
 	{
-		if (ft_strncmp(map->array_2d[i], "1", 1) == 0 || ft_strncmp(map->array_2d[i], "0", 1) == 0)
+		if (ft_strncmp(map->array_2d[i], " ", 1) == 0 || ft_strncmp(map->array_2d[i], "0", 1) == 0)
 		{
 			map->new_malloc = (char *)malloc(sizeof(char ) * map->max_width + 1);
-			ft_memset(map->new_malloc, 'B', sizeof(char) * map->max_width);
+			ft_memset(map->new_malloc, '-', sizeof(char) * map->max_width);
 			ft_memcpy(map->new_malloc, map->array_2d[i], ft_strlen(map->array_2d[i]));
 			free(map->array_2d[i]);
-			map->array_2d[i] = map->new_malloc;
-			printf("%s\n", map->array_2d[i]);
+			map->array_2d[i] = map->new_malloc;//これなくても大丈夫
 		}
-			i++;
+		i++;
 	}
+	//return (map->array_2d);
+	/* 	i = 0;----//出力テスト----
+		while(map->array_2d[i])
+		{
+		printf("%s\n", map->array_2d[i]);
+		i++;
+		} */
 }
 
 void	check_around_map(t_map_info *map)
@@ -49,48 +55,29 @@ void	check_around_map(t_map_info *map)
 {
 	size_t x;
 	size_t y;
+	size_t i;
+	size_t j;
 	size_t	topmost_y;
 	size_t	lowest_y;
 	size_t	left_x;
 	size_t	right_x;
 
-	x = 0;
-	topmost_y = 0;
-	lowest_y = map->max_height -1;
-	while (x < map->max_width)
-	{
-		if (map->array_2d[topmost_y][x] != '1' && map->array_2d[topmost_y][x] != ' ')
+		y = 0;
+		while(map->array_2d[y])
 		{
-			printf("ERROR in top\n");
-			break;
-		}
-		if (map->array_2d[lowest_y][x] != '1' && map->array_2d[lowest_y][x] != ' ')
+			x = 0;
+			while (map->array_2d[y][x] == ' ')
+			{
+				x++;
+			}
+			if (map->array_2d[y][x] == '1' || map->array_2d[y][x] == ' ')
 		{
-			printf("ERROR in low\n");
-			break;
+			printf("%c\n", map->array_2d[y][x]);
+			//printf("this is a map!\n");
 		}
-		x++;
+			y++;
+		}
 	}
-
-	y = 0;
-	left_x = 0;
-	right_x = map->max_width -2;
-	while (y < map->max_height)
-	{
-		if (map->array_2d[y][left_x] != '1' && map->array_2d[y][left_x] != ' ')
-		{
-			printf("ERROR in left\n");
-			break;
-
-		}
-		if (map->array_2d[y][right_x] != '1' && map->array_2d[y][right_x] != ' ')
-		{
-			printf("ERROR in right\n");
-			break;
-		}
-		y++;
-	}
-}
 
 void	check_inside_the_map(t_map_info *map)
 {

@@ -20,16 +20,16 @@ RM			= rm -f
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	$(MAKE) -C ./mlx_linux
 	$(MAKE) bonus -C ./libft
-	$(CC) $(OBJS) $(LIBFT) $(CFLAGS) -lm -lz -o $(NAME)
+	$(CC) $(OBJS) $(LIBFT) $(CFLAGS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 clean:
 	make clean -C ./libft
-#make clean -C ./mlx_linux
-#make clean -C ./ft_printf
+	make clean -C ./mlx_linux
 	$(RM) $(OBJS)
 
 fclean: clean
