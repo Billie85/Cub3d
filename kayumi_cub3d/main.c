@@ -37,8 +37,8 @@ size_t main(size_t argc, char *argv[])
 	Map->fd = open(argv[1], O_RDONLY);
 	Map->array_2d = (char **)malloc(sizeof(char *));
 	map(x, y, Map);
-	printf("max_height %ld\n", Map->max_height);
-	printf("max_width %ld\n", Map->max_width);
+/* 	printf("max_height %ld\n", Map->max_height);
+	printf("max_width %ld\n", Map->max_width); */
 	close(Map->fd);
 	system("leaks cub3d");
 	return (0);

@@ -1,23 +1,29 @@
 #include "cub3d.h"
 
-void	map(size_t	h, size_t i, t_map_info *map)
+int	map(size_t	h, size_t i, t_map_info *map)
 {
 	int y;
 	int x;
 	char **square_map;
+	bool	check;
 
 	Array_2D(map);
-	check_map(map);
-	
-	//remove_new_line(map);
-	//make_square(map);
-
-	/* y = 0;
-	while(map->array_2d[y])
+	check = check_direction_map(map);//
+	if (check == 1)
 	{
-		printf("%s\n", map->array_2d[y]);
-		y++;
-	} */
+		printf("map is okay\n");
+		y = 0;
+		while (map->new_map_square[y])
+		{
+			printf("%s\n", map->new_map_square[y]);  fflush(stdout);
+			y++;
+		}
+	}
+	else
+	{
+		printf("--map is error--\n");
+		return (0);
+	}
 	//check_around_map(map);
 	//check_inside_the_map(map);
 	//remove_new_line(map);

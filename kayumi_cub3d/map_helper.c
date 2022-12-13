@@ -29,24 +29,22 @@ void	make_square(t_map_info * map)//ここで四角の部分を整えてあげ�
 	i = 0;
 	while (map->array_2d[i])
 	{
-		if (ft_strncmp(map->array_2d[i], " ", 1) == 0 || ft_strncmp(map->array_2d[i], "0", 1) == 0)
-		{
-			map->new_malloc = (char *)malloc(sizeof(char ) * map->max_width + 1);
-			ft_memset(map->new_malloc, '-', sizeof(char) * map->max_width);
-			ft_memcpy(map->new_malloc, map->array_2d[i], ft_strlen(map->array_2d[i]));
-			free(map->array_2d[i]);
-			map->array_2d[i] = map->new_malloc;//これなくても大丈夫
-		}
+		map->new_malloc = (char *)malloc(sizeof(char ) * map->max_width + 1);
+		ft_memset(map->new_malloc, '-', sizeof(char) * map->max_width);
+		ft_memcpy(map->new_malloc, map->array_2d[i], ft_strlen(map->array_2d[i]));
+		free(map->array_2d[i]);
+		map->array_2d[i] = map->new_malloc;
 		i++;
 	}
+}
 	//return (map->array_2d);
-	/* 	i = 0;----//出力テスト----
+/* 		i = 0;
 		while(map->array_2d[i])
 		{
 		printf("%s\n", map->array_2d[i]);
 		i++;
-		} */
-}
+		}
+} */
 
 void	check_around_map(t_map_info *map)
 	//周りが1で囲まれているかどうかを確認する関数を作る。
