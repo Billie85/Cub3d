@@ -5,13 +5,15 @@ bool	check_direction_map(t_map_info *map)
 	int	no_found;
 	size_t	x;
 	size_t	y;
-	size_t	new_x;
 	size_t	new_y;
+	size_t	new_x;
 	int		flag[6];
 
 	y = 0;
 	new_y = 0;
-	map->new_map_square = (char **)malloc(sizeof(char *) * 22);
+	printf("max height [%ld]\n", map->max_height);
+	printf("max width [%ld]\n", map->max_width);
+	map->new_map_square = (char **)malloc(sizeof(char *) * map->max_height);//22
 	ft_bzero(flag, sizeof(flag));
 	while(map->array_2d[y])
 	{
@@ -102,11 +104,10 @@ bool	check_direction_map(t_map_info *map)
 		}
 		else if (ft_strchr(map->array_2d[y] + x , '1') || ft_strchr(map->array_2d[y] + x , '0'))
 		{
-			map->new_map_square[new_y] = ft_strdup(map->array_2d[y]);
-			new_y++;
 			remove_new_line(map);
 			make_square(map);
-			//printf("%s\n", map->new_map_square[new_y]);
+			map->new_map_square[new_y] = ft_strdup(map->array_2d[y]);
+			new_y++;
 		}
 		y++;
 	}

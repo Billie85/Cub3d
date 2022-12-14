@@ -8,14 +8,14 @@ int	map(size_t	h, size_t i, t_map_info *map)
 	bool	check;
 
 	Array_2D(map);
-	check = check_direction_map(map);//
+	check = check_direction_map(map);
 	if (check == 1)
 	{
 		printf("map is okay\n");
 		y = 0;
 		while (map->new_map_square[y])
 		{
-			printf("%s\n", map->new_map_square[y]);  fflush(stdout);
+			printf("%s\n", map->new_map_square[y]);
 			y++;
 		}
 	}
