@@ -26,6 +26,8 @@ typedef struct s_map_info
 	int		fd;
 	size_t	height;
 	size_t	width;
+	size_t	square_width;
+	size_t	square_height;
 	size_t	max_width;
 	size_t	max_height;
 	size_t	x1;
@@ -39,3 +41,5 @@ void	remove_new_line(t_map_info *map);
 bool	check_direction_map(t_map_info *map);
 bool 	check_map_top(t_map_info * map);
 bool	check_map_under(t_map_info *map);
+bool	check_map_left(t_map_info *map);
+bool	check_map_right(t_map_info *map);
