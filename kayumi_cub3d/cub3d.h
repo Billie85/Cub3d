@@ -38,3 +38,4 @@ void	make_square(t_map_info * map);
 void	remove_new_line(t_map_info *map);
 bool	check_direction_map(t_map_info *map);
 bool 	check_map_top(t_map_info * map);
+bool	check_map_under(t_map_info *map);
