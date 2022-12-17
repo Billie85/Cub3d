@@ -1,7 +1,7 @@
 NAME		= cub3d
 #PRINTF		= ./ft_printf/libftprintf.a
 
-SRCS		=	main.c map.c array_2d.c check_around_map.c check_map_error.c make_square.c \
+SRCS		=	main.c map.c array_2d.c check_around_map.c check_map_error.c make_square.c check_map_inside.c\
 				./get_next_line/get_next_line.c \
 				./get_next_line/get_next_line_utils.c
 

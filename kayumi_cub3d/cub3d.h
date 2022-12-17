@@ -43,3 +43,8 @@ bool 	check_map_top(t_map_info * map);
 bool	check_map_under(t_map_info *map);
 bool	check_map_left(t_map_info *map);
 bool	check_map_right(t_map_info *map);
+void	check_error_inside_map(t_map_info * map);
+bool	map_inside_left(t_map_info *map);
+bool	map_inside_right(t_map_info *map);
+bool	map_inside_down(t_map_info *map);
+bool	map_inside_up(t_map_info *map);
