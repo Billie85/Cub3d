@@ -35,9 +35,10 @@ size_t main(size_t argc, char *argv[])
 	t_map_info	*hoge;
 	size_t	width;
 	size_t	len;
+	int	retur_value;
 
-	size_t	x = 0;
-	size_t	y = 0;
+	size_t	x = 1;
+	size_t	y = 1;
 	len = 0;
 	width = 0;
 	//mlx = mlx_init();
@@ -46,9 +47,8 @@ size_t main(size_t argc, char *argv[])
 	Map = (t_map_info *)malloc(sizeof(t_map_info));
 	Map->fd = open(argv[1], O_RDONLY);
 	Map->array_2d = (char **)malloc(sizeof(char *));
-	map(x, y, Map);
-/* 	printf("max_height %ld\n", Map->max_height);
-	printf("max_width %ld\n", Map->max_width); */
+	retur_value = map(x, y, Map, NULL);
+	printf("return is ->[%c]\n", retur_value);
 	close(Map->fd);
 	system("leaks cub3d");
 	return (0);

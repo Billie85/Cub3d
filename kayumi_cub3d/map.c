@@ -50,7 +50,7 @@ void	check_error_inside_map(t_map_info * map)
 		printf(RED"ERROR\n"BACK);
 }
 
-void	chec_error_around_map(t_map_info * map, bool check)
+void	check_error_around_map(t_map_info * map, bool check)
 {
 	if (check == true)
 	{
@@ -80,19 +80,21 @@ void	chec_error_around_map(t_map_info * map, bool check)
 		printf(RED"ERROR\n"BACK);
 }
 
-int	map(size_t	h, size_t i, t_map_info *map)
+int	map(size_t	x, size_t y, t_map_info *map, char *ch)
 {
-	int y;
-	int x;
-	int flag[2];
-	char **square_map;
 	bool	check;
-	bool	check_top;
-	bool	check_under;
 
-	Array_2D(map);
-	check = check_direction_map(map);
-	count_square_map(map);
-	//全体のmapに変な文字とかsp || 1 || 0 || n 以外の文字があったら×にする処理を考えてあげる。
-	chec_error_around_map(map, check);
+	if (ch == NULL)
+	{
+		Array_2D(map);
+		check = check_direction_map(map);
+		count_square_map(map);
+		check_error_around_map(map, check);
+	}
+/* 	else if (ch == FREE_ALL)
+	{
+		free(map->new_map_square);
+		printf("i'm going to free\n");
+	} */
+	return (map->new_map_square[x][y]);
 }

@@ -2,6 +2,7 @@
 
 void	Array_2D(t_map_info *map)
 {
+
 	char **buff;
 	size_t	len;
 	size_t	len01;

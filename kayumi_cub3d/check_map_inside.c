@@ -13,7 +13,7 @@ bool	map_inside_down(t_map_info *map)
 		x = 1;
 		while(map->new_map_square[y][x])
 		{
-			if (map->new_map_square[y][x] == '0')
+			if (map->new_map_square[y][x] == '0' || map->new_map_square[y][x] == 'N')
 			{
 				if (map->new_map_square[y + 1][x] == '1' || map->new_map_square[y + 1][x] == '0' || map->new_map_square[y + 1][x] == 'N')
 					flag = true;
@@ -45,7 +45,7 @@ bool	map_inside_up(t_map_info *map)
 		x = 1;
 		while(map->new_map_square[y][x])
 		{
-			if (map->new_map_square[y][x] == '0')
+			if (map->new_map_square[y][x] == '0' || map->new_map_square[y][x] == 'N')
 			{
 				if (map->new_map_square[y - 1][x] == '1' || map->new_map_square[y - 1][x] == '0' || map->new_map_square[y - 1][x] == 'N')
 					flag = true;
@@ -77,7 +77,7 @@ bool	map_inside_right(t_map_info *map)
 		x = 1;
 		while(map->new_map_square[y][x])
 		{
-			if (map->new_map_square[y][x] == '0')
+			if (map->new_map_square[y][x] == '0' || map->new_map_square[y][x] == 'N')
 			{
 				if (map->new_map_square[y][x + 1] == '1' || map->new_map_square[y][x + 1] == '0' || map->new_map_square[y][x + 1] == 'N')
 					flag = true;
@@ -110,7 +110,7 @@ bool	map_inside_left(t_map_info *map)
 		x = 1;
 		while(map->new_map_square[y][x])
 		{
-			if (map->new_map_square[y][x] == '0')
+			if (map->new_map_square[y][x] == '0' || map->new_map_square[y][x] == 'N')
 			{
 				if (map->new_map_square[y][x -1] == '1' || map->new_map_square[y][x - 1] == '0' || map->new_map_square[y][x - 1] == 'N')
 					flag = true;

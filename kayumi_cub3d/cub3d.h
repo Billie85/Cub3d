@@ -10,6 +10,7 @@
 #include <mlx.h>
 
 
+# define FREE_ALL ~0LU
 # define BACK       	"\x1b[0m"
 # define RED			"\033[0;31m"
 # define YELLOW		"\033[1;33m]" 
@@ -24,13 +25,21 @@
 #define LEFT x - 1
 #define RIGHT x + 1
 
+typedef enum e_return_info
+{
+	MAP_ERROR,
+	BLOCK,
+	SPACE,
+	NONE,
+}	t_return_info;
+
 typedef struct s_map_info
 {
 	char	*new_malloc;
 	char	**array_2d;
 	char	**new_map_square;
 	char	*line;
-	char	**file;
+	char	*file;
 	int		fd;
 	size_t	height;
 	size_t	width;
@@ -40,9 +49,11 @@ typedef struct s_map_info
 	size_t	max_height;
 	size_t	x1;
 	size_t	y1;
+	char	*R;
+	char	*F;
 }t_map_info;
 
-int	map(size_t x, size_t y, t_map_info *map);
+int	map(size_t	x, size_t y, t_map_info *map, char *ch);
 void	Array_2D(t_map_info *map);
 void	make_square(t_map_info * map);
 void	remove_new_line(t_map_info *map);
@@ -56,4 +67,4 @@ bool	map_inside_left(t_map_info *map);
 bool	map_inside_right(t_map_info *map);
 bool	map_inside_down(t_map_info *map);
 bool	map_inside_up(t_map_info *map);
-void	chec_error_around_map(t_map_info * map, bool check);
+void	check_error_around_map(t_map_info * map, bool check);
