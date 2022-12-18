@@ -35,19 +35,49 @@ void	check_error_inside_map(t_map_info * map)
 				printf("map inside up is okay\n");
 				if (map_inside_down(map) == true)
 				{
-					printf("map inside down is okay\n");
+					printf(PURPLE"MAP IS OKAY\n"BACK);
 				}
 				else
-					printf("--map inside down is error--\n");
+					printf(RED"ERROR\n"BACK);
 			}
 			else
-				printf("--map inside up is error--\n");
+				printf(RED"ERROR\n"BACK);
 		}
 		else
-			printf("--map inside right is error--\n");
+			printf(RED"ERROR\n"BACK);
 	}
 	else
-		printf("--map inside left is error--\n");
+		printf(RED"ERROR\n"BACK);
+}
+
+void	chec_error_around_map(t_map_info * map, bool check)
+{
+	if (check == true)
+	{
+		if (check_map_top(map)== true)
+		{
+			if (check_map_under(map) == true)
+			{
+				if (check_map_left(map) == true)
+				{
+					if (check_map_right(map) == true)
+					{
+						check_error_inside_map(map);
+					}
+					else
+						printf(RED"ERROR\n"BACK);
+				}
+				else
+					printf(RED"ERROR\n"BACK);
+			}
+			else
+				printf(RED"ERROR\n"BACK);
+		}
+		else
+			printf(RED"ERROR\n"BACK);
+	}
+	else
+		printf(RED"ERROR\n"BACK);
 }
 
 int	map(size_t	h, size_t i, t_map_info *map)
@@ -63,37 +93,6 @@ int	map(size_t	h, size_t i, t_map_info *map)
 	Array_2D(map);
 	check = check_direction_map(map);
 	count_square_map(map);
-	if (check == true)
-	{
-		if (check_map_top(map)== true)
-		{
-			printf("map top is okay\n");
-			if (check_map_under(map) == true)
-			{
-				printf("map under is okay\n");
-				if (check_map_left(map) == true)
-				{
-					printf("map left side is okay\n");
-					if (check_map_right(map) == true)
-					{
-						printf("map right side is okay\n");
-						check_error_inside_map(map);
-					}
-					else
-						printf("--map right side is error--\n");
-				}
-				else
-					printf("--map left side is error--\n");
-			}
-			else
-				printf("--map under is error--\n");
-		}
-		else
-			printf("--map top is error--\n");
-	}
-	else
-	{
-		printf("--map direction is error--\n");
-		return (0);
-	}
+	//全体のmapに変な文字とかsp || 1 || 0 || n 以外の文字があったら×にする処理を考えてあげる。
+	chec_error_around_map(map, check);
 }

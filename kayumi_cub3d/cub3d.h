@@ -9,6 +9,14 @@
 # include <string.h>
 #include <mlx.h>
 
+
+# define BACK       	"\x1b[0m"
+# define RED			"\033[0;31m"
+# define YELLOW		"\033[1;33m]" 
+# define ORANGE		"\033[0;33m"
+# define GREEN		"\033[0;32m"
+# define CLAN		"\033[0;36m"
+# define PURPLE		"\033[1;35m"
 #define ZERO '0'
 #define MAX_MAP_HEIGHT 500
 #define DOWN y + 1
@@ -48,3 +56,4 @@ bool	map_inside_left(t_map_info *map);
 bool	map_inside_right(t_map_info *map);
 bool	map_inside_down(t_map_info *map);
 bool	map_inside_up(t_map_info *map);
+void	chec_error_around_map(t_map_info * map, bool check);
