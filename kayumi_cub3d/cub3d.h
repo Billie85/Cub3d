@@ -37,9 +37,8 @@ typedef struct s_map_info
 {
 	char	*new_malloc;
 	char	**array_2d;
-	char	**new_map_square;
+	unsigned char	**new_map_square;
 	char	*line;
-	char	*file;
 	int		fd;
 	size_t	height;
 	size_t	width;
@@ -51,13 +50,14 @@ typedef struct s_map_info
 	size_t	y1;
 	char	*R;
 	char	*F;
+	char	*file_name;
 }t_map_info;
 
-int	map(size_t	x, size_t y, t_map_info *map, char *ch);
+int	map(size_t	x, size_t y, t_map_info *ch);
 void	Array_2D(t_map_info *map);
 void	make_square(t_map_info * map);
 void	remove_new_line(t_map_info *map);
-bool	check_direction_map(t_map_info *map);
+unsigned char 	**check_direction_map(t_map_info *map);
 bool 	check_map_top(t_map_info * map);
 bool	check_map_under(t_map_info *map);
 bool	check_map_left(t_map_info *map);
@@ -67,4 +67,5 @@ bool	map_inside_left(t_map_info *map);
 bool	map_inside_right(t_map_info *map);
 bool	map_inside_down(t_map_info *map);
 bool	map_inside_up(t_map_info *map);
-void	check_error_around_map(t_map_info * map, bool check);
+void	check_error_around_map(t_map_info *map);
+int		set_map(char *file_name);

@@ -1,12 +1,12 @@
 #include "cub3d.h"
 
-void	Array_2D(t_map_info *map)
+void	Array_2D(t_map_info *map)//25
 {
-
-	char **buff;
+	char	**buff;
 	size_t	len;
 	size_t	len01;
-	size_t	x, y;
+	size_t	x;
+	size_t	y;
 
 	x = 0;
 	y = 0;
@@ -14,7 +14,7 @@ void	Array_2D(t_map_info *map)
 	map->max_height = 0;
 	map->max_width = 0;
 	map->line = get_next_line(map->fd);
-	while(map->line != NULL)
+	while (map->line != NULL)
 	{
 		buff = map->array_2d;
 		map->array_2d = (char **)malloc(sizeof(char *) * (map->height + 2));

@@ -10,7 +10,7 @@ void	count_square_map(t_map_info *map)
 	len = 0;
 	map->square_height = 0;
 	map->square_width = 0;
-	while(map->new_map_square[y])
+	while (map->new_map_square[y])
 	{
 		len = ft_strlen(map->new_map_square[y]);
 		if (len > map->square_width)
@@ -18,83 +18,75 @@ void	count_square_map(t_map_info *map)
 		map->square_height++;
 		y++;
 	}
-	printf("square_width [%ld]\n", map->square_width);
-	printf("square_height [%ld]\n", map->square_height);
 }
 
-void	check_error_inside_map(t_map_info * map)
+void	check_error_inside_map(t_map_info *map)
 {
 	if (map_inside_left(map) == true)
 	{
-		printf("map inside left is okay\n");
 		if (map_inside_right(map) == true)
 		{
-			printf("map inside right is okay\n");
 			if (map_inside_up(map) == true)
 			{
-				printf("map inside up is okay\n");
 				if (map_inside_down(map) == true)
 				{
 					printf(PURPLE"MAP IS OKAY\n"BACK);
 				}
 				else
-					printf(RED"ERROR\n"BACK);
+					printf(RED"6ERROR\n"BACK);
 			}
 			else
-				printf(RED"ERROR\n"BACK);
+				printf(RED"7ERROR\n"BACK);
 		}
 		else
-			printf(RED"ERROR\n"BACK);
+			printf(RED"8ERROR\n"BACK);
 	}
 	else
-		printf(RED"ERROR\n"BACK);
+		printf(RED"9ERROR\n"BACK);
 }
 
-void	check_error_around_map(t_map_info * map, bool check)
+void	check_error_around_map(t_map_info *map)
 {
-	if (check == true)
+	if (check_map_top(map) == true)
 	{
-		if (check_map_top(map)== true)
+		if (check_map_under(map) == true)
 		{
-			if (check_map_under(map) == true)
+			if (check_map_left(map) == true)
 			{
-				if (check_map_left(map) == true)
+				if (check_map_right(map) == true)
 				{
-					if (check_map_right(map) == true)
-					{
-						check_error_inside_map(map);
-					}
-					else
-						printf(RED"ERROR\n"BACK);
+					check_error_inside_map(map);
 				}
 				else
-					printf(RED"ERROR\n"BACK);
+					printf(RED"1ERROR\n"BACK);
 			}
 			else
-				printf(RED"ERROR\n"BACK);
+				printf(RED"2ERROR\n"BACK);
 		}
 		else
-			printf(RED"ERROR\n"BACK);
+			printf(RED"3ERROR\n"BACK);
 	}
 	else
-		printf(RED"ERROR\n"BACK);
+		printf(RED"4ERROR\n"BACK);
 }
 
-int	map(size_t	x, size_t y, t_map_info *map, char *ch)
+int	map(size_t	x, size_t y, t_map_info *Map)
 {
 	bool	check;
+	static unsigned char	**static_map;
 
-	if (ch == NULL)
+	if (Map != NULL)
 	{
-		Array_2D(map);
-		check = check_direction_map(map);
-		count_square_map(map);
-		check_error_around_map(map, check);
+		Array_2D(Map);
+		static_map = check_direction_map(Map);
+		if (static_map == false)
+			return (false);
+		count_square_map(Map);
+		check_error_around_map(Map);
 	}
-/* 	else if (ch == FREE_ALL)
+	/* else if (Map == FREE_ALL)
 	{
-		free(map->new_map_square);
-		printf("i'm going to free\n");
+		free(Map->new_map_square);
 	} */
-	return (map->new_map_square[x][y]);
+	return (static_map[x][y]);
 }
