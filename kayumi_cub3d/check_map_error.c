@@ -99,5 +99,5 @@ char	**check_direction_map(t_map_info *map)
 	if(!(flag[0] && flag[1] && flag[2] && flag[3] && flag[4] && flag[5]))
 		return (false);
 	else
-		return ((char **)map->new_map_square);
+		return (map->new_map_square);
 }

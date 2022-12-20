@@ -36,7 +36,7 @@ typedef struct s_map_info
 	char	*new_malloc;
 	char	**array_2d;
 	char 	**direction_part;
-	unsigned char	**new_map_square;
+	char	**new_map_square;
 	char	*line;
 	int		fd;
 	size_t	height;
@@ -68,3 +68,24 @@ bool	map_inside_down(t_map_info *map);
 bool	map_inside_up(t_map_info *map);
 bool	check_error_around_map(t_map_info *map);
 int		set_map(char *file_name);
+
+/* 
+#ifndef DEBUG_H
+#define DEBUG_H
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/time.h>
+#define TEST printf("[(%s/%d) %s ]\n", __FILE__, __LINE__, __func__); fflush(stdin);
+#define TEST_ printf("---------------------------------------------[(%s/%d) %s ]\n", __FILE__, __LINE__, __func__); fflush(stdin);
+#define TESTn(i) printf("[(%s/%d) %s ]%s:%ld\n", __FILE__, __LINE__, __func__, #i, (long)(i)); fflush(stdin);
+#define TESTu(i) printf("[(%s/%d) %s ]%s:%lu\n", __FILE__, __LINE__, __func__, #i, (unsigned long)(i)); fflush(stdin);
+#define TESTx(i) printf("[(%s/%d) %s ]%s:%lx\n", __FILE__, __LINE__, __func__, #i, (unsigned long)(i)); fflush(stdin);
+#define TESTd(i) printf("[(%s/%d) %s ]%s:%lf\n", __FILE__, __LINE__, __func__, #i, (double)(i)); fflush(stdin);
+#define TESTp(i) printf("[(%s/%d) %s ]%s:%p\n", __FILE__, __LINE__, __func__, #i, (i)); fflush(stdin);
+#define TESTs(i) printf("[(%s/%d) %s ]%s:%s\n", __FILE__, __LINE__, __func__, #i, (char *)(i)); fflush(stdin);
+#define TESTc(i) printf("[(%s/%d) %s ]%s:%c\n", __FILE__, __LINE__, __func__, #i, (char)(i)); fflush(stdin);
+#define TIME printf("[(%s/%d) %s ]%lf[s]\n", __FILE__, __LINE__, __func__, time_diff()); fflush(stdin);
+#define STOP {char c; read(STDIN_FILENO, &c, sizeof(char));}
+
+#endif
+ */

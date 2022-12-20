@@ -30,6 +30,7 @@ void	make_square(t_map_info * map)
 	{
 		map->new_malloc = (char *)malloc(sizeof(char ) * map->max_width + 1);
 		ft_memset(map->new_malloc, ' ', sizeof(char) * map->max_width);
+		map->new_malloc[map->max_width] = '\0';
 		ft_memcpy(map->new_malloc, map->array_2d[i], ft_strlen(map->array_2d[i]));
 		free(map->array_2d[i]);
 		map->array_2d[i] = map->new_malloc;

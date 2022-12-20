@@ -7,7 +7,7 @@ SRCS		=	main.c map.c array_2d.c check_around_map.c check_map_error.c make_square
 
 OBJS		= $(SRCS:%.c=%.o)
 
-LIBFT		= ./libft/libft.a
+LIBFT		= ../libft/libft.a
 
 LIBMLX		= libmlx.a
 
@@ -20,8 +20,8 @@ RM			= rm -f
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(MAKE) bonus -C ./libft
-	$(CC) $(OBJS) $(LIBFT) $(CFLAGS)  -lm -lz -o $(NAME)
+	$(MAKE) bonus -C ../libft
+	$(CC) $(OBJS) $(LIBFT) $(CFLAGS) -lm -lz -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@

@@ -93,6 +93,7 @@ bool	check_error_around_map(t_map_info *map)
 		printf(RED"4ERROR\n"BACK);
 		return (false);
 	}
+	return (true);
 }
 
 int	map(size_t	i, size_t j, t_map_info *Map)
@@ -124,5 +125,5 @@ int	map(size_t	i, size_t j, t_map_info *Map)
 			else
 			return (true);
 	}
-	return (static_map[i][j]);
+	return ((int)static_map[i][j]);
 }
