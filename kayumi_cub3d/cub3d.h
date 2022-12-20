@@ -56,7 +56,7 @@ int	map(size_t	x, size_t y, t_map_info *ch);
 void	Array_2D(t_map_info *map);
 void	make_square(t_map_info * map);
 void	remove_new_line(t_map_info *map);
-unsigned char 	**check_direction_map(t_map_info *map);
+char 	**check_direction_map(t_map_info *map);
 bool 	check_map_top(t_map_info * map);
 bool	check_map_under(t_map_info *map);
 bool	check_map_left(t_map_info *map);

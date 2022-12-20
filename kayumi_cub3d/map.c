@@ -100,7 +100,7 @@ int	map(size_t	i, size_t j, t_map_info *Map)
 	size_t	y;
 	size_t	y_d;
 	bool	check;
-	static unsigned char	**static_map;
+	static char	**static_map;
 
 	if (Map == (t_map_info *) FREE_ALL)
 	{	

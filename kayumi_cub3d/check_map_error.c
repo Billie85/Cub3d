@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-unsigned char	**check_direction_map(t_map_info *map)
+char	**check_direction_map(t_map_info *map)
 {
 	size_t	x;
 	size_t	y;
@@ -9,7 +9,7 @@ unsigned char	**check_direction_map(t_map_info *map)
 
 	y = 0;
 	new_y = 0;
-	map->new_map_square = (unsigned char **)malloc(sizeof(unsigned char *) * map->max_height);
+	map->new_map_square = malloc(sizeof(char *) * map->max_height);
 	ft_bzero(flag, sizeof(flag));
 	while (map->array_2d[y])
 	{
@@ -99,5 +99,5 @@ unsigned char	**check_direction_map(t_map_info *map)
 	if(!(flag[0] && flag[1] && flag[2] && flag[3] && flag[4] && flag[5]))
 		return (false);
 	else
-		return (map->new_map_square);
+		return ((char **)map->new_map_square);
 }
