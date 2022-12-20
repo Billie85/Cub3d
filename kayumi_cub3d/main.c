@@ -2,5 +2,7 @@
 
 size_t main(size_t argc, char *argv[])
 {
-	set_map("original.txt");
+	int test;
+	test = set_map("original.txt");
+	printf("set map return ->[%d]\n", test);
 }

@@ -12,10 +12,10 @@ int	set_map(char *file_name)
 	Map = (t_map_info *)malloc(sizeof(t_map_info));
 	Map->fd = open(file_name, O_RDONLY);
 	Map->array_2d = (char **)malloc(sizeof(char *));
-	map (0, 0, Map);
-	//return_value = map(x, y, NULL);
-	//printf("map return value is ->[%c]\n", return_value);
+	if(map (0, 0, Map) == false)
+		return (false);
+		else
+			return (true);
 	close(Map->fd);
-	//system("leaks cub3d");
 	return (0);
 }

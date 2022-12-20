@@ -75,17 +75,24 @@ unsigned char	**check_direction_map(t_map_info *map)
 				flag[5] = 0;
 				return (false);
 			}
+
+			
 			else
 				flag[5] = 1;
 		}
 		else if (ft_strchr(map->array_2d[y] + x , '1') || \
 			ft_strchr(map->array_2d[y] + x , '0'))
 		{
-			remove_new_line(map);
-			make_square(map);
-			map->new_map_square[new_y] = ft_strdup(map->array_2d[y]);
-			new_y++;
+			break;
 		}
+		y++;
+	}
+	while (map->array_2d[y])
+	{
+		remove_new_line(map);
+		make_square(map);
+		map->new_map_square[new_y] = ft_strdup(map->array_2d[y]);
+		new_y++;
 		y++;
 	}
 	map->new_map_square[new_y] = NULL;
