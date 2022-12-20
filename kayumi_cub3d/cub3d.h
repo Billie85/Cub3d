@@ -2,12 +2,10 @@
 # include "mlx_linux/mlx.h" */
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
-# include "mlx_linux/mlx.h"
 #include <stdbool.h>
 # include <math.h>
 # include <stdio.h>
 # include <string.h>
-#include <mlx.h>
 
 
 # define FREE_ALL ~0LU
