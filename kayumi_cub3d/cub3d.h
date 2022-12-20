@@ -1,6 +1,6 @@
 /* # include "mlx_linux/mlx.h"
 # include "mlx_linux/mlx.h" */
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include "get_next_line/get_next_line.h"
 #include <stdbool.h>
 # include <math.h>
@@ -69,7 +69,7 @@ bool	map_inside_up(t_map_info *map);
 bool	check_error_around_map(t_map_info *map);
 int		set_map(char *file_name);
 
-/* 
+/*  */
 #ifndef DEBUG_H
 #define DEBUG_H
 #include <stdio.h>
@@ -88,4 +88,3 @@ int		set_map(char *file_name);
 #define STOP {char c; read(STDIN_FILENO, &c, sizeof(char));}
 
 #endif
- */
