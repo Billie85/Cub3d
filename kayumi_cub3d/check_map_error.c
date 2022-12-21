@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "set_map.h"
 
 char	**check_direction_map(t_map_info *map)
 {

@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "set_map.h"
 
 void	remove_new_line(t_map_info *map)
 {

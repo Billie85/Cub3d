@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "set_map.h"
 
 int main(int argc, char *argv[])
 {

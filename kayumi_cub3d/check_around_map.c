@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "set_map.h"
 
 bool	check_map_right(t_map_info *map)
 {

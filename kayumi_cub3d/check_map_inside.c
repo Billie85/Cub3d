@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "set_map.h"
 
 bool	map_inside_down(t_map_info *map)
 {

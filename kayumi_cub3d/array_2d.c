@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "set_map.h"
 
 void	Array_2D(t_map_info *map)//25
 {
