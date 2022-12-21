@@ -6,8 +6,9 @@
 # include <math.h>
 # include <float.h>
 # include <fcntl.h>
-#include "../libft/libft.h"
-# include "../mlx-linux/mlx.h"
+# include <unistd.h>
+# include "../libft/libft.h"
+# include "../minilibx_mms_20200219/mlx.h"
 
 # define BL 30
 # define DIS_W 1200
@@ -15,13 +16,13 @@
 
 # define SEE 0.4
 
-# define ESC_KEY 65307
-# define TL_KEY 65361
-# define TR_KEY 65363
-# define W_KEY 119
-# define A_KEY 97
-# define S_KEY 115
-# define D_KEY 100
+# define ESC_KEY 53
+# define TL_KEY 123
+# define TR_KEY 124
+# define W_KEY 13
+# define A_KEY 0
+# define S_KEY 1
+# define D_KEY 2
 
 # define GO_LEN   0.01
 # define TRN_LEN  0.01

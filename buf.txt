@@ -1,0 +1,63 @@
+mlx_window.swift:25:26: warning: initialization of 'UnsafeMutableRawPointer' results in a dangling pointer
+      eventParams.append(UnsafeMutableRawPointer(&keyrepeat)) /// dummy address here, null not needed
+                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mlx_window.swift:25:50: note: implicit argument conversion from 'Int' to 'UnsafeMutableRawPointer' produces a pointer valid only for the duration of the call to 'init(_:)'
+      eventParams.append(UnsafeMutableRawPointer(&keyrepeat)) /// dummy address here, null not needed
+                                                 ^~~~~~~~~~
+mlx_window.swift:25:50: note: use 'withUnsafeMutableBytes' in order to explicitly convert argument to buffer pointer valid for a defined scope
+      eventParams.append(UnsafeMutableRawPointer(&keyrepeat)) /// dummy address here, null not needed
+                                                 ^
+mlx_init.swift:43:14: warning: initialization of 'UnsafeMutableRawPointer' results in a dangling pointer
+        loopParam = UnsafeMutableRawPointer(&inLoop)  /// dummy addr init
+                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mlx_init.swift:43:38: note: implicit argument conversion from 'Bool' to 'UnsafeMutableRawPointer' produces a pointer valid only for the duration of the call to 'init(_:)'
+        loopParam = UnsafeMutableRawPointer(&inLoop)  /// dummy addr init
+                                            ^~~~~~~
+mlx_init.swift:43:38: note: use 'withUnsafeMutableBytes' in order to explicitly convert argument to buffer pointer valid for a defined scope
+        loopParam = UnsafeMutableRawPointer(&inLoop)  /// dummy addr init
+                                            ^
+mlx_window.swift:25:26: warning: initialization of 'UnsafeMutableRawPointer' results in a dangling pointer
+      eventParams.append(UnsafeMutableRawPointer(&keyrepeat)) /// dummy address here, null not needed
+                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mlx_window.swift:25:50: note: implicit argument conversion from 'Int' to 'UnsafeMutableRawPointer' produces a pointer valid only for the duration of the call to 'init(_:)'
+      eventParams.append(UnsafeMutableRawPointer(&keyrepeat)) /// dummy address here, null not needed
+                                                 ^~~~~~~~~~
+mlx_window.swift:25:50: note: use 'withUnsafeMutableBytes' in order to explicitly convert argument to buffer pointer valid for a defined scope
+      eventParams.append(UnsafeMutableRawPointer(&keyrepeat)) /// dummy address here, null not needed
+                                                 ^
+mlx_init.swift:43:14: warning: initialization of 'UnsafeMutableRawPointer' results in a dangling pointer
+        loopParam = UnsafeMutableRawPointer(&inLoop)  /// dummy addr init
+                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mlx_init.swift:43:38: note: implicit argument conversion from 'Bool' to 'UnsafeMutableRawPointer' produces a pointer valid only for the duration of the call to 'init(_:)'
+        loopParam = UnsafeMutableRawPointer(&inLoop)  /// dummy addr init
+                                            ^~~~~~~
+mlx_init.swift:43:38: note: use 'withUnsafeMutableBytes' in order to explicitly convert argument to buffer pointer valid for a defined scope
+        loopParam = UnsafeMutableRawPointer(&inLoop)  /// dummy addr init
+                                            ^
+ar: creating archive libft.a
+Undefined symbols for architecture arm64:
+  "_mlx_destroy_image", referenced from:
+      _set_img in main.o
+      _dis in dis.o
+  "_mlx_get_data_addr", referenced from:
+      _set_img in main.o
+      _dis in dis.o
+  "_mlx_hook", referenced from:
+      _main in main.o
+  "_mlx_init", referenced from:
+      _main in main.o
+  "_mlx_loop", referenced from:
+      _main in main.o
+  "_mlx_loop_hook", referenced from:
+      _main in main.o
+  "_mlx_new_image", referenced from:
+      _dis in dis.o
+  "_mlx_new_window", referenced from:
+      _main in main.o
+  "_mlx_put_image_to_window", referenced from:
+      _dis in dis.o
+  "_mlx_xpm_file_to_image", referenced from:
+      _set_img in main.o
+ld: symbol(s) not found for architecture arm64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [cub3d] Error 1

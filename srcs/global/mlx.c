@@ -1,5 +1,3 @@
-#include "../cub3D.h"
-
 void *mlx(void *set)
 {
 	static void*	mlx_ptr;
