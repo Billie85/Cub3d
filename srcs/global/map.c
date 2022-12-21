@@ -30,7 +30,7 @@ bool	check_error_inside_map(t_map_info *map)
 			{
 				if (map_inside_down(map) == true)
 				{
-					printf(PURPLE"MAP IS OKAY\n"BACK);
+					printf("MAP IS OKAY\n");
 					return (true);
 				}
 				else

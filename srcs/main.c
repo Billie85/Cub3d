@@ -49,7 +49,7 @@ char *read_file(int fd, size_t B)
 	char s[BUFER_SIZE];
 	char *r;
 
-	l = read(fd, s, B);
+	l = read(fd, s, BUFER_SIZE);
 	if (l < 0)
 		return (NULL);
 	else if (l == 0)
@@ -70,7 +70,7 @@ int switch_name(char **dst, char *file, unsigned *f);
 int img_mame(char **dst , char *file)
 {	
 	unsigned f;
-
+	
 	f = 0;
 	while (*file)
 	{
@@ -166,6 +166,7 @@ int switch_name2(char **dst, char *file, unsigned *f)
 		}
 		*f |= 1U << 4;
 		dst[4] = file + 1;
+		return (0);
 	}
 	else if (*file == 'F')
 	{
@@ -176,6 +177,7 @@ int switch_name2(char **dst, char *file, unsigned *f)
 		}
 		*f |= 1U << 5;
 		dst[5] = file + 1;
+		return (0);
 	}
 	else if (*file == '\n' || !(*file))
 		return (0);

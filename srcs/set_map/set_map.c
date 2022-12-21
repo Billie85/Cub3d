@@ -13,9 +13,9 @@ int	set_map(char *file_name)
 	Map->fd = open(file_name, O_RDONLY);
 	Map->array_2d = (char **)malloc(sizeof(char *));
 	if(map (0, 0, Map) == false)
-		return (false);
+		return (1);
 		else
-			return (true);
+			return (0);
 	close(Map->fd);
 	return (0);
 }
