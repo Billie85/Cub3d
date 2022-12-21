@@ -27,7 +27,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 clean:
-	make clean -C ./libft
+	make clean -C ../libft
 	$(RM) $(OBJS)
 
 fclean: clean
