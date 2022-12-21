@@ -61,7 +61,6 @@ bool	check_map_under(t_map_info *map)
 	flag = 0;
 	while (map->new_map_square[y][x])
 	{
-		printf("%s\n", map->new_map_square[y]);
 		if (map->new_map_square[y][x] == '1' || \
 			map->new_map_square[y][x] == ' ')
 			flag = true;

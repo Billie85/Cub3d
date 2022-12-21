@@ -7,7 +7,7 @@ bool	map_inside_down(t_map_info *map)
 	size_t	flag;
 
 	y = 1;
-	flag = 0;
+	flag = 1;
 	while (map->new_map_square[y])
 	{
 		x = 1;
@@ -41,7 +41,7 @@ bool	map_inside_up(t_map_info *map)
 	size_t	flag;
 
 	y = 1;
-	flag = 0;
+	flag = 1;
 	while (map->new_map_square[y])
 	{
 		x = 1;
@@ -73,7 +73,7 @@ bool	map_inside_right(t_map_info *map)
 	size_t	flag;
 
 	y = 1;
-	flag = 0;
+	flag = 1;
 	while (map->new_map_square[y])
 	{
 		x = 1;
@@ -105,7 +105,7 @@ bool	map_inside_left(t_map_info *map)
 	size_t	y;
 	size_t	flag;
 
-	flag = 0;
+	flag = 1;
 	y = 1;
 	while (map->new_map_square[y])
 	{

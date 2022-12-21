@@ -1,5 +1,12 @@
 #include "cub3d.h"
 
+typedef struct s_now
+{
+    double  x;
+    double  y;
+    double  r;
+}t_now;
+
 void	count_square_map(t_map_info *map)
 {
 	size_t	x;
@@ -96,6 +103,97 @@ bool	check_error_around_map(t_map_info *map)
 	return (true);
 }
 
+void	rev_map(char	**map)
+{
+	size_t l;
+	size_t y;
+	char	*buf;
+
+	y = 0;
+	l = 0;
+	while (map[l])
+		l++;
+	while (y < l / 2)
+	{
+		buf = map[y];
+		map[y] = map[l - 1 - y];
+		map[l - 1 - y] = buf;
+		y++;
+	}
+}
+
+int	setting_now1(char *c, int *f, t_now *n);
+int	setting_now(char *c, int *f, t_now 	*n)
+{
+	if (*c == 'N')
+	{
+		if (*f)
+			return(1);
+		*c = '0';
+		n->r = 0.5;
+		now(n);
+	}
+	else if (*c == 'E')
+	{
+		if (*f)
+			return(1);
+		*c = '0';
+		n->r = 1.0;
+		now(n);
+	}
+	else 
+		return (setting_now1(c, f, n));
+	return (0);
+}
+
+int	setting_now1(char *c, int *f, t_now 	*n)
+{
+	if (*c == 'S')
+	{
+		if (*f)
+			return(1);
+		*c = '0';
+		n->r = 1.5;
+		now(n);
+	}
+	else if (*c == 'W')
+	{
+		if (*f)
+			return(1);
+		*c = '0';
+		n->r = 0.0;
+		now(n);
+	}
+	return (0);
+}
+
+
+bool	set_now(char	**map)
+{
+	size_t	x;
+	size_t	y;
+	int		f;
+	t_now 	n;
+
+	f = false;
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			n.x = (double)x + 0.5;
+			n.x = (double)y + 0.5;
+			if (setting_now(&map[y][x], &f, &n))
+				return (false);
+			x++;
+		}
+		y++;
+	}
+	return (true);
+}
+
+
 int	map(size_t	i, size_t j, t_map_info *Map)
 {
 	size_t	y;
@@ -120,10 +218,11 @@ int	map(size_t	i, size_t j, t_map_info *Map)
 			return (false);
 		}
 		count_square_map(Map);
-		if (check_error_around_map(Map) == false)
+		rev_map(static_map);
+		if (set_now(static_map) == false || check_error_around_map(Map) == false)
 			return (false);
-			else
-			return (true);
+		return (true);
+		
 	}
 	return ((int)static_map[i][j]);
 }
