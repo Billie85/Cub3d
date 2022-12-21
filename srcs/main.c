@@ -13,6 +13,7 @@ int	main(int argc, char *argv[])
 	win(mlx_new_window(mlx(0), DIS_W, DIS_H, "cub3d"));
 	if (set_head(argv[1]) || set_map(argv[1]))
 		return (1);
+	dis(0, 0, 0, SET);
 	mlx_loop_hook(mlx(0), cub3d, NULL);
 	mlx_hook(win(0), 2, 0, set_key, NULL);
 	mlx_hook(win(0), 3, 0, rm_key, NULL);
@@ -184,7 +185,7 @@ int switch_name2(char **dst, char *file, unsigned *f)
 	return (1);
 }
 
-void set_img_bit(unsigned *p, int bits_per_pixel, int size_line, unsigned *dst);
+void set_img_bit(char *p, int bits_per_pixel, int size_line, unsigned *dst);
 int set_img(char **name, unsigned *imgs)
 {
 	size_t	i;
@@ -199,16 +200,20 @@ int set_img(char **name, unsigned *imgs)
 		img_data = mlx_xpm_file_to_image(mlx(0), name[i], &bp, &sl);
 		if (!img_data || bp < BL || sl < BL)
 			return (1);
-		set_img_bit((unsigned *) mlx_get_data_addr(img_data, &bp, &sl, &buf), \
-		sl, bp , imgs + (BL * BL * i));
+		bp = 0;
+		sl = 0;
+		buf = 0;
+		set_img_bit(mlx_get_data_addr(img_data, &bp, &sl, &buf), \
+		bp, sl,  imgs + (BL * BL * i));
 		mlx_destroy_image(mlx(0), img_data);
 		i++;
 	}
+
 	img(SET, 0, imgs);
 	return (0);
 }
 
-void set_img_bit(unsigned *p, int bits_per_pixel, int size_line, unsigned *dst)
+void set_img_bit(char *p, int bits_per_pixel, int size_line, unsigned *dst)
 {
 	size_t x;
 	size_t y;
@@ -219,7 +224,7 @@ void set_img_bit(unsigned *p, int bits_per_pixel, int size_line, unsigned *dst)
 		x = 0;
 		while(x < BL)
 		{
-			dst[x * BL + y] = p[y * size_line + x * (bits_per_pixel / 8)];
+			dst[x * BL + y] = *(unsigned *)(p + y * size_line + x * (bits_per_pixel / 8));
 			x++;
 		}
 		y++;
@@ -270,6 +275,23 @@ void	set_cf1(size_t	i, unsigned n)
 
 int		cub3d(void	*p)
 {
+	/* unsigned img_d[BL];
+
+	for (size_t i = 0; i < 4; i++)
+	{
+		for (size_t l = 0; l < BL; l++)
+		{
+			img((int)i, l, img_d);
+			for (size_t y = 0; y < BL; y++)
+			{
+				dis(l + i * BL + 100,y + 100,img_d[y], CLOR);
+			}
+			
+		}
+		
+	}
+	dis(0,0,0, FLUSH);
+ */
 	move();
 	cast();
 	return (0);
@@ -316,52 +338,7 @@ void move1(t_now *n)
 
 void cast_line(t_now *n, t_line *l);
 
-void	dis_line1(t_line *l, size_t i);
-void	dis_line(t_line *l, size_t i)
-{
-	double y;
-	double pic_l;
-	int	d;
-
-	pic_l = l->far * sqrt(3) / 2;
-	d = DIS_H / 2 - 1;
-	y = BL / 2 - MINI_NUM;
-	while (d >= 0)
-	{
-		if (y >= 0)
-		{
-			y -= pic_l;
-			dis(i, d, l->data[(int)floor(y)], CLOR);
-		}
-		else
-			dis(i, d, ceiling(0), CLOR);
-		d--;
-	}
-	dis_line1(l, i);
-}
-
-void	dis_line1(t_line *l, size_t i)
-{
-	double y;
-	double pic_l;
-	int	d;
-
-	pic_l = l->far * sqrt(3) / 2;
-	d = DIS_H / 2;
-	y = BL / 2;
-	while (d < DIS_H)
-	{
-		if (y < BL)
-		{
-			dis(i, d, l->data[(int)floor(y)], CLOR);
-			y += pic_l;
-		}
-		else
-			dis(i, d, ceiling(0), CLOR);
-		d++;
-	}
-}
-
+void	dis_line(t_line *l, size_t i);
 
 void cast()
 {
@@ -372,6 +349,7 @@ void cast()
 	n = now(0);
 	n.r += SEE / 2;
 	if (n.r)
+	i = 0;
 	while (i < DIS_W)
 	{
 		while (n.r >= 2.0)
@@ -380,7 +358,9 @@ void cast()
 			n.r += 2.0;
 		cast_line(&n, &l);
 		l.far *= sin((now(0).r - n.r) * M_PI);
+TEST
 		dis_line(&l, i);
+TEST
 		n.r -= SEE / DIS_W;
 		i++;
 	}
@@ -592,6 +572,54 @@ void cast_line_retS(double rx, double ry, t_line *l)
 	img(SOUTH, round((floor(rx) + 1 - rx) * BL), l->data);
 }
 
+void	dis_line1(t_line *l, size_t i);
+void	dis_line(t_line *l, size_t i)
+{
+	double y;
+	double pic_l;
+	int	d;
+
+	pic_l = l->far * sqrt(3) / 2;
+	d = DIS_H / 2 - 1;
+	y = BL / 2 - MINI_NUM;
+TEST
+	while (d >= 0)
+	{
+		if (y >= 0)
+		{
+			y -= pic_l;
+TESTn(floor(y))
+			dis(i, d, l->data[(int)floor(y)], CLOR);/* floor(y)がどこかおかしい */
+		}
+		else
+			dis(i, d, ceiling(0), CLOR);
+		d--;
+	}
+	dis_line1(l, i);
+}
+
+void	dis_line1(t_line *l, size_t i)
+{
+	double y;
+	double pic_l;
+	int	d;
+
+	pic_l = l->far * sqrt(3) / 2;
+	d = DIS_H / 2;
+	y = BL / 2;
+	while (d < DIS_H)
+	{
+		if (y < BL)
+		{
+			dis(i, d, l->data[(int)floor(y)], CLOR);
+			y += pic_l;
+		}
+		else
+			dis(i, d, ceiling(0), CLOR);
+		d++;
+	}
+}
+
 
 int	set_key(int	k, void	*p)
 {
@@ -628,8 +656,8 @@ int	rm_key(int	k, void	*p)
 
 int		end_cub(void	*p)
 {
-	img(0, 0, (unsigned int *) FREE_ALL);
 	dis(0, 0, 0, (int) FREE_ALL);
+	map(0, 0, (void *)FREE_ALL);
 	exit(0);
 }
 

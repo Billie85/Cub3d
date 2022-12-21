@@ -75,8 +75,6 @@ char	**check_direction_map(t_map_info *map)
 				flag[5] = 0;
 				return (false);
 			}
-
-			
 			else
 				flag[5] = 1;
 		}

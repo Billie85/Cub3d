@@ -212,6 +212,7 @@ int	map(size_t	x, size_t y, t_map_info *Map)
 
 	if (Map == (t_map_info *) FREE_ALL)
 	{	
+TEST
 		i = 0;
 		while (static_map[i])
 			free(static_map[i]);

@@ -5,7 +5,7 @@ void 	img(int flag, size_t len, unsigned *io)
 
 	if (flag == SET)
 		ft_memcpy(img_data, io, BL * BL * 4);
-	else if (flag < 4)
-		ft_memcpy(io, img_data + BL * BL * flag + BL * len, BL);
+	else if (flag < 4 && flag >= 0)
+		ft_memcpy(io, img_data + (BL * BL * flag) + (BL * len), BL * sizeof(unsigned));
 	return ;
 }

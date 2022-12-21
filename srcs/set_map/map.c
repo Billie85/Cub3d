@@ -60,6 +60,7 @@ bool	check_error_inside_map(t_map_info *map)
 
 bool	check_error_around_map(t_map_info *map)
 {
+	printf("aaaaaaa\n");
 	if (check_map_top(map) == true)
 	{
 		if (check_map_under(map) == true)
@@ -101,7 +102,6 @@ void	rev_map(char	**map)
 	size_t l;
 	size_t y;
 	char	*buf;
-
 	y = 0;
 	l = 0;
 	while (map[l])
@@ -211,7 +211,7 @@ int	map(size_t	x, size_t y, t_map_info *Map)
 	static size_t h;
 
 	if (Map == (t_map_info *) FREE_ALL)
-	{	
+	{
 		y = 0;
 		while (static_map[y])
 			free(static_map[y]);
