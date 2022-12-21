@@ -1,12 +1,5 @@
 #include "cub3d.h"
 
-typedef struct s_now
-{
-    double  x;
-    double  y;
-    double  r;
-}t_now;
-
 void	count_square_map(t_map_info *map)
 {
 	size_t	x;
@@ -123,13 +116,15 @@ void	rev_map(char	**map)
 }
 
 int	setting_now1(char *c, int *f, t_now *n);
+int	setting_now2(char *c);
+
 int	setting_now(char *c, int *f, t_now 	*n)
 {
 	if (*c == 'N')
 	{
 		if (*f)
 			return(1);
-		*c = '0';
+		*c = SPACE;
 		n->r = 0.5;
 		now(n);
 	}
@@ -137,7 +132,7 @@ int	setting_now(char *c, int *f, t_now 	*n)
 	{
 		if (*f)
 			return(1);
-		*c = '0';
+		*c = SPACE;
 		n->r = 1.0;
 		now(n);
 	}
@@ -152,7 +147,7 @@ int	setting_now1(char *c, int *f, t_now 	*n)
 	{
 		if (*f)
 			return(1);
-		*c = '0';
+		*c = SPACE;
 		n->r = 1.5;
 		now(n);
 	}
@@ -160,10 +155,24 @@ int	setting_now1(char *c, int *f, t_now 	*n)
 	{
 		if (*f)
 			return(1);
-		*c = '0';
+		*c = SPACE;
 		n->r = 0.0;
 		now(n);
-	}
+	}else
+		return (setting_now2(c));
+	return (0);
+}
+
+int	setting_now2(char *c)
+{
+	if (*c == '0')
+		*c = SPACE;
+	else if (*c == '1')
+		*c = BACK;
+	else if (*c == ' ')
+		*c = NONE;
+	else
+		return (1);
 	return (0);
 }
 
@@ -194,18 +203,19 @@ bool	set_now(char	**map)
 }
 
 
-int	map(size_t	i, size_t j, t_map_info *Map)
+int	map(size_t	x, size_t y, t_map_info *Map)
 {
 	size_t	y;
-	size_t	y_d;
-	bool	check;
 	static char	**static_map;
+	static size_t w;
+	static size_t h;
 
 	if (Map == (t_map_info *) FREE_ALL)
 	{	
 		y = 0;
 		while (static_map[y])
-			free(static_map);
+			free(static_map[y]);
+		free(static_map);
 		y++;
 	}
 	else if (Map != NULL)
@@ -218,11 +228,14 @@ int	map(size_t	i, size_t j, t_map_info *Map)
 			return (false);
 		}
 		count_square_map(Map);
+		w = Map->square_width;
+		h = Map->square_height;
 		rev_map(static_map);
-		if (set_now(static_map) == false || check_error_around_map(Map) == false)
+		if (check_error_around_map(Map) == false || set_now(static_map) == false)
 			return (false);
 		return (true);
-		
 	}
+	if (x >= w || y >= h)
+		return (MAP_ERROR);
 	return ((int)static_map[i][j]);
 }

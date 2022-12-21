@@ -85,13 +85,14 @@ char **split_line(const char *str, size_t header);
 
 //global
 
+typedef struct s_map_info t_map_info;
 
 void	*mlx(void *set);
 void	*win(void *set);
 unsigned 	key(unsigned set);
 t_now 	now(t_now *set);
 void 	img(int flag, size_t len, unsigned *io);
-int 	map(size_t x, size_t y, void *set);
+int	map(size_t	x, size_t y, t_map_info *Map);
 void    dis(size_t x, size_t y, unsigned c, int f);
 unsigned int	flooring(unsigned int set);
 unsigned int	ceiling(unsigned int set);

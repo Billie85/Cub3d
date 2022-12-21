@@ -69,6 +69,28 @@ bool	map_inside_up(t_map_info *map);
 bool	check_error_around_map(t_map_info *map);
 int		set_map(char *file_name);
 
+#ifndef CUB3D_H
+# define CUB3D_H
+
+# define BLOCK 1
+# define SPACE 2
+# define NONE 3
+# define MAP_ERROR 4
+
+# define FREE_ALL ~0LU
+
+typedef struct s_now
+{
+    double  x;
+    double  y;
+    double  r;
+}t_now;
+
+t_now 	now(t_now *set);
+
+#endif
+
+
 /*  */
 #ifndef DEBUG_H
 #define DEBUG_H
