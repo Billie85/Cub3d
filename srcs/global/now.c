@@ -6,7 +6,9 @@ t_now 	now(t_now *set)
 
 	if (set)
 	{
+//TESTn(map((size_t)floor(set->x), (size_t)floor(set->y), 0) == SPACE)
 		if (map((size_t)floor(set->x), (size_t)floor(set->y), 0) == SPACE)
+
 			n = *set;
 		else
 			n.r = set->r;

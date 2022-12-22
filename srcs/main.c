@@ -16,30 +16,7 @@ int	main(int argc, char *argv[])
 	dis(0, 0, 0, SET);
 
 	//map(0,0,42);
-for (size_t y = 0; map(0, y, 0) != MAP_ERROR; y++)
-{
-	for (size_t x = 0; map(x, y, 0) != MAP_ERROR; x++)
-	{
-		switch (map(x, y, 0))
-		{
-		case BLOCK:
-			printf("#");
-			break;
-		case SPACE:
-			printf(" ");
-			break;
-		case NONE:
-			printf(".");
-			break;
-		default:
-			printf("?");
-			break;
-		}
-		fflush(stdout);
-	}
-	printf("\n");
-}
-		
+	
 	mlx_loop_hook(mlx(0), cub3d, NULL);
 	mlx_hook(win(0), 2, 0, set_key, NULL);
 	mlx_hook(win(0), 3, 0, rm_key, NULL);
@@ -318,6 +295,10 @@ int		cub3d(void	*p)
 	}
 	dis(0,0,0, FLUSH);
  */
+
+TESTd(now(0).x)
+TESTd(now(0).y)//-----------------------------------nowがおかしい
+TESTd(now(0).r)
 	move();
 	cast();
 	return (0);
