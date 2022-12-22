@@ -210,14 +210,28 @@ int	map(size_t	x, size_t y, t_map_info *Map)
 	static size_t w;
 	static size_t h;
 
+/* if (Map == (t_map_info *) 42)
+{
+	for (size_t y = 0; static_map[y]; y++)
+	{
+		for (size_t x = 0; static_map[y][x]; x++)
+		{
+			printf("%d,", static_map[y][x]);
+		}
+		printf("\n");
+	}
+	return (0);
+}
+ */
 	if (Map == (t_map_info *) FREE_ALL)
 	{	
-TEST
 		i = 0;
 		while (static_map[i])
+		{
 			free(static_map[i]);
+			i++;
+		}
 		free(static_map);
-		i++;
 		return (0);
 	}
 	else if (Map != NULL)
@@ -239,5 +253,5 @@ TEST
 	}
 	if (x >= w || y >= h)
 		return (MAP_ERROR);
-	return ((int)static_map[x][y]);
+	return ((int)static_map[y][x]);
 }

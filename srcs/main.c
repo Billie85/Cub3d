@@ -14,6 +14,32 @@ int	main(int argc, char *argv[])
 	if (set_head(argv[1]) || set_map(argv[1]))
 		return (1);
 	dis(0, 0, 0, SET);
+
+	//map(0,0,42);
+for (size_t y = 0; map(0, y, 0) != MAP_ERROR; y++)
+{
+	for (size_t x = 0; map(x, y, 0) != MAP_ERROR; x++)
+	{
+		switch (map(x, y, 0))
+		{
+		case BLOCK:
+			printf("#");
+			break;
+		case SPACE:
+			printf(" ");
+			break;
+		case NONE:
+			printf(".");
+			break;
+		default:
+			printf("?");
+			break;
+		}
+		fflush(stdout);
+	}
+	printf("\n");
+}
+		
 	mlx_loop_hook(mlx(0), cub3d, NULL);
 	mlx_hook(win(0), 2, 0, set_key, NULL);
 	mlx_hook(win(0), 3, 0, rm_key, NULL);
@@ -358,9 +384,10 @@ void cast()
 			n.r += 2.0;
 		cast_line(&n, &l);
 		l.far *= sin((now(0).r - n.r) * M_PI);
-TEST
+		if (l.far < 0)
+			l.far *= -1;
+
 		dis_line(&l, i);
-TEST
 		n.r -= SEE / DIS_W;
 		i++;
 	}
@@ -416,6 +443,11 @@ void cast_line1(t_line *l, t_f *fx, t_f *fy)
 	y = floor(now(0).y) + 1.0;
 	while (map(x, y, 0) != BLOCK)
 	{
+if (map(x, y, 0) == NONE)
+{
+TEST
+STOP
+}
 		f = 1;
 		ry = fx->a * x + fx->b;
 		if (ry > y)
@@ -447,6 +479,11 @@ void cast_line2(t_line *l, t_f *fx, t_f *fy)
 	y = floor(now(0).y) + 1.0;
 	while (map(x, y, 0) != BLOCK)
 	{
+if (map(x, y, 0) == NONE)
+{
+TEST
+STOP
+}
 		f = 1;
 		ry = fx->a * x + fx->b;
 		if (ry > y)
@@ -478,6 +515,11 @@ void cast_line3(t_line *l, t_f *fx, t_f *fy)
 	y = floor(now(0).y);
 	while (map(x, y, 0) != BLOCK)
 	{
+if (map(x, y, 0) == NONE)
+{
+TEST
+STOP
+}
 		f = 1;
 		ry = fx->a * x + fx->b;
 		if (ry > y)
@@ -509,6 +551,11 @@ void cast_line4(t_line *l, t_f *fx, t_f *fy)
 	y = floor(now(0).y);
 	while (map(x, y, 0) != BLOCK)
 	{
+if (map(x, y, 0) == NONE)
+{
+TEST
+STOP
+}
 		f = 1;
 		ry = fx->a * x + fx->b;
 		if (ry > y)
@@ -582,14 +629,12 @@ void	dis_line(t_line *l, size_t i)
 	pic_l = l->far * sqrt(3) / 2;
 	d = DIS_H / 2 - 1;
 	y = BL / 2 - MINI_NUM;
-TEST
 	while (d >= 0)
 	{
 		if (y >= 0)
 		{
-			y -= pic_l;
-TESTn(floor(y))
 			dis(i, d, l->data[(int)floor(y)], CLOR);/* floor(y)がどこかおかしい */
+			y -= pic_l;
 		}
 		else
 			dis(i, d, ceiling(0), CLOR);
