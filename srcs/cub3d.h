@@ -24,7 +24,7 @@
 # define S_KEY 1
 # define D_KEY 2
 
-# define GO_LEN   0.01
+# define GO_LEN   0.1
 # define TRN_LEN  0.01
 
 # define GO_      0x0f
@@ -138,5 +138,14 @@ int		end_cub(void	*p);
 #define FORc(i,j) {printf("[(%s/%d) %s ]%s:", __FILE__, __LINE__, __func__, #i);for(size_t test_arg = 0; test_arg j; test_arg++){printf("%c, ", (char)((i)[test_arg]));} printf("\n"); fflush(stdin);}
 #define TAKE(i,j) {static size_t test_arg = 0; if(!(test_arg % j)){i} test_arg++;}
 #define STOP {char c; read(STDIN_FILENO, &c, sizeof(char));}
+
+
+typedef struct cub3d
+{
+    double x;
+    double y;
+}wa;
+
+extern wa www;
 
 #endif

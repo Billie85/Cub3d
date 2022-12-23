@@ -1,4 +1,5 @@
 #include "cub3d.h"
+wa www;/* test */
 
 int set_head(char *file);
 int set_map(char *file);
@@ -16,6 +17,7 @@ int	main(int argc, char *argv[])
 	dis(0, 0, 0, SET);
 
 	//map(0,0,42);
+	key(GO_NONE | TRN_NONE);
 	
 	mlx_loop_hook(mlx(0), cub3d, NULL);
 	mlx_hook(win(0), 2, 0, set_key, NULL);
@@ -278,7 +280,7 @@ void	set_cf1(size_t	i, unsigned n)
 
 int		cub3d(void	*p)
 {
-	/* unsigned img_d[BL];
+	/*unsigned img_d[BL];
 
 	for (size_t i = 0; i < 4; i++)
 	{
@@ -292,13 +294,10 @@ int		cub3d(void	*p)
 			
 		}
 		
-	}
+	} 
 	dis(0,0,0, FLUSH);
  */
-
-TESTd(now(0).x)
-TESTd(now(0).y)//-----------------------------------nowがおかしい
-TESTd(now(0).r)
+	/*  */
 	move();
 	cast();
 	return (0);
@@ -324,8 +323,9 @@ void move()
 		ra = 1.5;
 	if ((key(0) & GO_) != GO_NONE)
 	{
-		n.x += sin((n.r + ra) * M_PI);
-		n.y += cos((n.r + ra) * M_PI);
+//TEST
+		n.x += cos((n.r + ra) * M_PI) * GO_LEN;
+		n.y += sin((n.r + ra) * M_PI) * GO_LEN;
 	}
 	move1(&n);
 }
@@ -355,7 +355,6 @@ void cast()
 
 	n = now(0);
 	n.r += SEE / 2;
-	if (n.r)
 	i = 0;
 	while (i < DIS_W)
 	{
@@ -364,14 +363,88 @@ void cast()
 		while (n.r < 0.0)
 			n.r += 2.0;
 		cast_line(&n, &l);
-		l.far *= sin((now(0).r - n.r) * M_PI);
+		l.far *= cos((now(0).r - n.r) * M_PI);
 		if (l.far < 0)
-			l.far *= -1;
-
+		 	l.far *= -1;
 		dis_line(&l, i);
+/* */
+double xl, yl, xr, yr, xc, yc;
+double rl, rr, rc;
+if (!i)
+{
+rl = n.r;
+xl = www.x;
+yl = www.y;
+}
+if (i == DIS_W / 2 - 1)
+{
+rc = n.r;
+xc = www.x;
+yc = www.y;
+}
+if (i == DIS_W - 1)
+{
+rr = n.r;
+xr = www.x;
+yr = www.y;
+}
+if(i == DIS_W - 1)
+{
+size_t y = 0;
+size_t x = 0;
+	for (; map(0,y,0) != MAP_ERROR; y++)
+	{
+	x = 0;
+	for (; map(x,y,0) != MAP_ERROR; x++)
+	{
+		switch (map(x,y,0))
+		{
+		case BLOCK:
+			if (x == floor(xc) && y == floor(yc))
+			printf("*");
+			else if (x == floor(xl) && y == floor(yl))
+			printf("L");
+			else if (x == floor(xr) && y == floor(yr))
+			printf("R");
+			else
+			printf("#");
+			break;
+		case SPACE:
+			if ((double)x == floor(now(0).x) && (double)y == floor(now(0).y))
+			printf("X");
+			else
+			printf(" ");
+			break;
+		case NONE:
+			if ((double)x == floor(now(0).x) && (double)y == floor(now(0).y))
+			printf(".");
+			break;
+		
+		default:
+		TESTn(map(x,y,0)) STOP
+			break;
+		}
+		fflush(stdout);
+	}
+		printf("\n");
+	}
+TESTd(now(0).x);
+TESTd(now(0).y);
+TESTd(now(0).r);
+TESTd(xc)
+TESTd(yc)
+TESTd(rc)
+TESTd(rr)
+
+printf("\033[%zuA" ,y + 7);
+printf("\033[%zuD" ,x);
+}
+
+
 		n.r -= SEE / DIS_W;
 		i++;
 	}
+ 
 	dis(0, 0, 0, FLUSH);
 	return ;
 }
@@ -392,6 +465,9 @@ void cast_line(t_now *n, t_line *l)
 	t_f fy;
 	
 	cast_line_init(n->r, &fx, &fy);
+//TESTd(now(0).x)
+//TESTd(now(0).y)
+//TESTd(n->r)
 	if (n->r < 0.5)
 		cast_line1(l, &fx, &fy);
 	else if (n->r < 1.0)
@@ -414,78 +490,94 @@ void cast_line_init(double r, t_f *fx, t_f *fy)
 
 void cast_line1(t_line *l, t_f *fx, t_f *fy)
 {
+//TEST_
 	size_t x;
 	size_t y;
 	double rx;
 	double ry;
 	int f;
 
-	x = floor(now(0).x) + 1.0;
-	y = floor(now(0).y) + 1.0;
+	x = floor(now(0).x);
+	y = floor(now(0).y);
 	while (map(x, y, 0) != BLOCK)
 	{
-if (map(x, y, 0) == NONE)
-{
-TEST
-STOP
-}
 		f = 1;
-		ry = fx->a * x + fx->b;
-		if (ry > y)
-		{
+		if (fx->a * (x + 1) + fx->b > (y + 1))
 			f = 0;
-			rx = fy->a * y + fy->b;
-			y++;
-		}
-		else
+		if (f)
 			x++;
+		else
+			y++;
 	}
 	if (f)
-		cast_line_retE(x, ry, l);
+		cast_line_retW(x, fx->a * x + fx->b, l);
 	else
-		cast_line_retS(rx, y, l);
+		cast_line_retS(fy->a * y + fy->b, y, l);
 	return;
 
 }
 
 void cast_line2(t_line *l, t_f *fx, t_f *fy)
 {
+//TEST_
 	size_t x;
 	size_t y;
 	double rx;
 	double ry;
 	int f;
 
-	x = floor(now(0).x);
-	y = floor(now(0).y) + 1.0;
-	while (map(x, y, 0) != BLOCK)
+	x = floor(now(0).x) + 1;
+	y = floor(now(0).y);
+	while (map(x - 1, y, 0) != BLOCK)
 	{
-if (map(x, y, 0) == NONE)
-{
-TEST
-STOP
-}
 		f = 1;
-		ry = fx->a * x + fx->b;
-		if (ry > y)
-		{
+		if (fx->a * (x - 1) + fx->b > (y + 1))
 			f = 0;
-			rx = fy->a * y + fy->b;
-			y++;
-		}
-		else
+		if (f)
 			x--;
+		else
+			y++;
 	}
 	if (f)
-		cast_line_retW(x, ry, l);
+		cast_line_retE(x, fx->a * x + fx->b, l);
 	else
-		cast_line_retS(rx, y, l);
+		cast_line_retS(fy->a * y + fy->b, y, l);
 	return;
 
 }
 
 void cast_line3(t_line *l, t_f *fx, t_f *fy)
 {
+//TEST_
+	size_t x;
+	size_t y;
+	double rx;
+	double ry;
+	int f;
+
+	x = floor(now(0).x) + 1;
+	y = floor(now(0).y) + 1;
+	while (map(x - 1, y - 1, 0) != BLOCK)
+	{
+		f = 1;
+		if (fx->a * (x - 1) + fx->b < (y - 1))
+			f = 0;
+		if (f)
+			x--;
+		else
+			y--;
+	}
+	if (f)
+		cast_line_retE(x, fx->a * x + fx->b, l);
+	else
+		cast_line_retN(fy->a * y + fy->b, y, l);
+	return;
+
+}
+
+void cast_line4(t_line *l, t_f *fx, t_f *fy)
+{
+//TEST_
 	size_t x;
 	size_t y;
 	double rx;
@@ -493,111 +585,91 @@ void cast_line3(t_line *l, t_f *fx, t_f *fy)
 	int f;
 
 	x = floor(now(0).x);
-	y = floor(now(0).y);
-	while (map(x, y, 0) != BLOCK)
+	y = floor(now(0).y) + 1;
+	while (map(x, y - 1, 0) != BLOCK)
 	{
-if (map(x, y, 0) == NONE)
-{
-TEST
-STOP
-}
 		f = 1;
-		ry = fx->a * x + fx->b;
-		if (ry > y)
-		{
+		if (fx->a * (x + 1) + fx->b < (y - 1))
 			f = 0;
-			rx = fy->a * y + fy->b;
-			y--;
-		}
-		else
-			x--;
-	}
-	if (f)
-		cast_line_retW(x, ry, l);
-	else
-		cast_line_retN(rx, y, l);
-	return;
-
-}
-
-void cast_line4(t_line *l, t_f *fx, t_f *fy)
-{
-	size_t x;
-	size_t y;
-	double rx;
-	double ry;
-	int f;
-
-	x = floor(now(0).x) + 1.0;
-	y = floor(now(0).y);
-	while (map(x, y, 0) != BLOCK)
-	{
-if (map(x, y, 0) == NONE)
-{
-TEST
-STOP
-}
-		f = 1;
-		ry = fx->a * x + fx->b;
-		if (ry > y)
-		{
-			f = 0;
-			rx = fy->a * y + fy->b;
-			y--;
-		}
-		else
+		if (f)
 			x++;
+		else
+			y--;
 	}
 	if (f)
-		cast_line_retS(x, ry, l);
+		cast_line_retW(x, fx->a * x + fx->b, l);
 	else
-		cast_line_retN(rx, y, l);
+		cast_line_retN(fy->a * y + fy->b, y, l);
 	return;
 
 }
 
 void cast_line_retW(double rx, double ry, t_line *l)
 {
+//TEST
+www.x = rx;
+www.y = ry;
 	double dx;
 	double dy;
 
 	dx = now(0).x - rx;
 	dy = now(0).y - ry;
 	l->far = sqrt(dx * dx + dy * dy);
-	img(WEST, round((floor(ry) + 1 - ry) * BL), l->data);
+//TESTd(ry)
+//TESTd(floor((floor(ry) + 1 - ry) * BL))
+//TESTn((size_t)floor((floor(ry) + 1 - ry) * BL))
+	img(WEST, floor((floor(ry) + 1 - ry) * BL), l->data);
 }
 
 void cast_line_retN(double rx, double ry, t_line *l)
 {
+//TEST
+www.x = rx;
+www.y = ry;
 	double dx;
 	double dy;
 
 	dx = now(0).x - rx;
 	dy = now(0).y - ry;
 	l->far = sqrt(dx * dx + dy * dy);
-	img(NORTH, round((rx - floor(rx)) * BL), l->data);
+//TESTd(rx)
+//TESTd(floor((rx - floor(rx)) * BL))
+//TESTn((size_t)floor((rx - floor(rx)) * BL))
+	img(NORTH, floor((rx - floor(rx)) * BL), l->data);
 }
 
 void cast_line_retE(double rx, double ry, t_line *l)
 {
+//TEST
+www.x = rx;
+www.y = ry;
 	double dx;
 	double dy;
 
 	dx = now(0).x - rx;
 	dy = now(0).y - ry;
 	l->far = sqrt(dx * dx + dy * dy);
-	img(EAST, round((ry - floor(ry)) * BL), l->data);
+//TESTd(ry)
+//TESTd(floor((ry - floor(ry)) * BL))
+//TESTn((size_t)floor((ry - floor(ry)) * BL))
+	img(EAST, floor((ry - floor(ry)) * BL), l->data);
 }
 
 void cast_line_retS(double rx, double ry, t_line *l)
 {
+//TEST
+www.x = rx;
+www.y = ry;
 	double dx;
 	double dy;
 
 	dx = now(0).x - rx;
 	dy = now(0).y - ry;
 	l->far = sqrt(dx * dx + dy * dy);
-	img(SOUTH, round((floor(rx) + 1 - rx) * BL), l->data);
+//TESTd(rx)
+//TESTd(floor((floor(rx) + 1 - rx) * BL))
+//TESTn((size_t)floor((floor(rx) + 1 - rx) * BL))
+	img(SOUTH, floor((floor(rx) + 1 - rx) * BL), l->data);
 }
 
 void	dis_line1(t_line *l, size_t i);
@@ -607,7 +679,7 @@ void	dis_line(t_line *l, size_t i)
 	double pic_l;
 	int	d;
 
-	pic_l = l->far * sqrt(3) / 2;
+	pic_l = tan((SEE / 2) * M_PI) * l->far * 2/ BL;
 	d = DIS_H / 2 - 1;
 	y = BL / 2 - MINI_NUM;
 	while (d >= 0)
@@ -630,7 +702,7 @@ void	dis_line1(t_line *l, size_t i)
 	double pic_l;
 	int	d;
 
-	pic_l = l->far * sqrt(3) / 2;
+	pic_l = tan((SEE / 2) * M_PI) * l->far * 2 / BL;
 	d = DIS_H / 2;
 	y = BL / 2;
 	while (d < DIS_H)

@@ -1,7 +1,7 @@
 NO ./imgs/cub.xpm
-SO ./imgs/wall.xpm
-WE ./imgs/wall.xpm
-EA ./imgs/wall.xpm
+SO ./imgs/cub.xpm
+WE ./imgs/cub.xpm
+EA ./imgs/cub.xpm
 
 F 220,100,0
 C 25,30,0

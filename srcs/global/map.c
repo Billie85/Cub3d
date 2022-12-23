@@ -124,6 +124,7 @@ int	setting_now(char *c, int *f, t_now 	*n)
 	{
 		if (*f)
 			return(1);
+		*f = 1;
 		*c = SPACE;
 		n->r = 0.5;
 		now(n);
@@ -132,6 +133,7 @@ int	setting_now(char *c, int *f, t_now 	*n)
 	{
 		if (*f)
 			return(1);
+		*f = 1;
 		*c = SPACE;
 		n->r = 1.0;
 		now(n);
@@ -147,6 +149,7 @@ int	setting_now1(char *c, int *f, t_now 	*n)
 	{
 		if (*f)
 			return(1);
+		*f = 1;
 		*c = SPACE;
 		n->r = 1.5;
 		now(n);
@@ -155,6 +158,7 @@ int	setting_now1(char *c, int *f, t_now 	*n)
 	{
 		if (*f)
 			return(1);
+		*f = 1;
 		*c = SPACE;
 		n->r = 0.0;
 		now(n);
@@ -184,7 +188,7 @@ bool	set_now(char	**map)
 	int		f;
 	t_now 	n;
 
-	f = false;
+	f = 0;
 	y = 0;
 	while (map[y])
 	{
@@ -192,13 +196,18 @@ bool	set_now(char	**map)
 		while (map[y][x])
 		{
 			n.x = (double)x + 0.5;
-			n.x = (double)y + 0.5;
+			n.y = (double)y + 0.5;
 			if (setting_now(&map[y][x], &f, &n))
 				return (false);
 			x++;
 		}
 		y++;
 	}
+if (f == 0)
+{
+	TEST
+	STOP
+}
 	return (true);
 }
 
