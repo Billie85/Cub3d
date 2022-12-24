@@ -25,7 +25,7 @@
 # define D_KEY 2
 
 # define GO_LEN   0.1
-# define TRN_LEN  0.01
+# define TRN_LEN  0.025
 
 # define GO_      0x0f
 # define TRN_     0xf0

@@ -18,7 +18,8 @@ int	main(int argc, char *argv[])
 
 	//map(0,0,42);
 	key(GO_NONE | TRN_NONE);
-	
+TESTx(ceiling(0))
+TESTx(flooring(0))
 	mlx_loop_hook(mlx(0), cub3d, NULL);
 	mlx_hook(win(0), 2, 0, set_key, NULL);
 	mlx_hook(win(0), 3, 0, rm_key, NULL);
@@ -260,7 +261,8 @@ int set_cf(char **str)
 			if (l == 0 || l > 3 || ft_atoi(str[i]) > 0xff || \
 			(ii < 2 && str[i][l] != ',') || (ii == 2 && str[i][l] != '\0'))
 				return (1);
-			n |= ft_atoi(str[i]) << (3 - ii) * 8;
+			n |= ft_atoi(str[i]) << (2 - ii) * 8;
+TESTx(n)
 			str[i] += l + 1;
 			ii++;
 		}
@@ -273,31 +275,19 @@ int set_cf(char **str)
 void	set_cf1(size_t	i, unsigned n)
 {
 	if (i == 4)
+{
+TESTx(n)
 		ceiling(n);
+}
 	else
+{
+TESTx(n)
+}
 		flooring(n);
 }
 
 int		cub3d(void	*p)
 {
-	/*unsigned img_d[BL];
-
-	for (size_t i = 0; i < 4; i++)
-	{
-		for (size_t l = 0; l < BL; l++)
-		{
-			img((int)i, l, img_d);
-			for (size_t y = 0; y < BL; y++)
-			{
-				dis(l + i * BL + 100,y + 100,img_d[y], CLOR);
-			}
-			
-		}
-		
-	} 
-	dis(0,0,0, FLUSH);
- */
-	/*  */
 	move();
 	cast();
 	return (0);
@@ -635,7 +625,7 @@ www.y = ry;
 //TESTd(rx)
 //TESTd(floor((rx - floor(rx)) * BL))
 //TESTn((size_t)floor((rx - floor(rx)) * BL))
-	img(NORTH, floor((rx - floor(rx)) * BL), l->data);
+	img(NORTH, floor((floor(rx) + 1 - rx) * BL), l->data);
 }
 
 void cast_line_retE(double rx, double ry, t_line *l)
@@ -669,7 +659,7 @@ www.y = ry;
 //TESTd(rx)
 //TESTd(floor((floor(rx) + 1 - rx) * BL))
 //TESTn((size_t)floor((floor(rx) + 1 - rx) * BL))
-	img(SOUTH, floor((floor(rx) + 1 - rx) * BL), l->data);
+	img(SOUTH, floor((rx - floor(rx)) * BL), l->data);
 }
 
 void	dis_line1(t_line *l, size_t i);
@@ -713,7 +703,7 @@ void	dis_line1(t_line *l, size_t i)
 			y += pic_l;
 		}
 		else
-			dis(i, d, ceiling(0), CLOR);
+			dis(i, d, flooring(0), CLOR);
 		d++;
 	}
 }
