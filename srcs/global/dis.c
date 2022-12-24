@@ -1,10 +1,11 @@
 #include "../cub3d.h"
-void dis(size_t x, size_t y, unsigned c, int f)
+
+void	dis(size_t x, size_t y, unsigned int c, int f)
 {
-	static void *img_p;
-	static char *p;
-	static int size_line;
-	static int bits_per_pixel;
+	static void	*img_p;
+	static char	*p;
+	static int	size_line;
+	static int	bits_per_pixel;
 
 	if (f == CLOR)
 		*(unsigned *)(p + y * size_line + x * (bits_per_pixel / 8)) = c;

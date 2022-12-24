@@ -1,13 +1,16 @@
 #include "../cub3d.h"
 
-void set_img_bit(char *p, int bits_per_pixel, int size_line, unsigned *dst);
-int set_img(char **name, unsigned *imgs)
+void	set_img_bit(char *p, int bits_per_pixel, \
+int size_line, unsigned int *dst);
+void	set_cf1(size_t	*i, unsigned int n);
+
+int	set_img(char **name, unsigned int *imgs)
 {
 	size_t	i;
-	int	bp;
-	int	sl;
-	int buf;
-	void *img_data;
+	int		bp;
+	int		sl;
+	int		buf;
+	void	*img_data;
 
 	i = 0;
 	while (i < 4)
@@ -19,27 +22,28 @@ int set_img(char **name, unsigned *imgs)
 		sl = 0;
 		buf = 0;
 		set_img_bit(mlx_get_data_addr(img_data, &bp, &sl, &buf), \
-		bp, sl,  imgs + (BL * BL * i));
+		bp, sl, imgs + (BL * BL * i));
 		mlx_destroy_image(mlx(0), img_data);
 		i++;
 	}
-
 	img(SET, 0, imgs);
 	return (0);
 }
 
-void set_img_bit(char *p, int bits_per_pixel, int size_line, unsigned *dst)
+void	set_img_bit(char *p, int bits_per_pixel, \
+int size_line, unsigned int *dst)
 {
-	size_t x;
-	size_t y;
+	size_t	x;
+	size_t	y;
 
 	y = 0;
 	while (y < BL)
 	{
 		x = 0;
-		while(x < BL)
+		while (x < BL)
 		{
-			dst[x * BL + y] = *(unsigned *)(p + y * size_line + x * (bits_per_pixel / 8));
+			dst[x * BL + y] = \
+			*(unsigned *)(p + y * size_line + x * (bits_per_pixel / 8));
 			x++;
 		}
 		y++;
@@ -47,16 +51,13 @@ void set_img_bit(char *p, int bits_per_pixel, int size_line, unsigned *dst)
 	return ;
 }
 
-
-void	set_cf1(size_t	i, unsigned n);
-
-int set_cf(char **str)
+int	set_cf(char **str)
 {
-	size_t i;
-	size_t ii;
-	size_t l;
-	unsigned n;
-	
+	size_t			i;
+	size_t			ii;
+	size_t			l;
+	unsigned int	n;
+
 	i = 4;
 	while (i < 6)
 	{
@@ -74,16 +75,16 @@ int set_cf(char **str)
 			str[i] += l + 1;
 			ii++;
 		}
-		set_cf1(i, n);
-		i++;
+		set_cf1(&i, n);
 	}
 	return (0);
 }
 
-void	set_cf1(size_t	i, unsigned n)
+void	set_cf1(size_t	*i, unsigned int n)
 {
-	if (i == 4)
+	if (*i == 4)
 		ceiling(n);
 	else
 		flooring(n);
+	(*i)++;
 }

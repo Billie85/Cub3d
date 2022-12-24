@@ -1,15 +1,16 @@
-void *mlx(void *set)
+
+void	*mlx(void *set)
 {
-	static void*	mlx_ptr;
+	static void	*mlx_ptr;
 
 	if (set)
 		mlx_ptr = set;
 	return (mlx_ptr);
 }
 
-void *win(void *set)
+void	*win(void *set)
 {
-	static void*	win_ptr;
+	static void	*win_ptr;
 
 	if (set)
 		win_ptr = set;

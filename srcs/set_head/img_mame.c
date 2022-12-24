@@ -1,25 +1,24 @@
 #include "../cub3d.h"
 
-int switch_name(char **dst, char *file, unsigned *f);
+int	switch_name(char **dst, char *file, unsigned int *f);
+int	switch_name1(char **dst, char *file, unsigned int *f);
+int	switch_name2(char **dst, char *file, unsigned int *f);
 
-int img_mame(char **dst , char *file)
+int	img_mame(char **dst, char *file)
 {	
-	unsigned f;
-	
+	unsigned int	f;
+
 	f = 0;
 	while (*file)
 	{
 		while (*file && *file == ' ')
 			file++;
 		if (switch_name(dst, file, &f))
-			break;
+			break ;
 		while (*file && *file != '\n')
 			file++;
 		if (*file == '\n')
-		{
-			*file = '\0';
-			file++;
-		}
+			*(file++) = '\0';
 	}
 	if (f != 0b111111)
 		return (1);
@@ -32,10 +31,7 @@ int img_mame(char **dst , char *file)
 	return (0);
 }
 
-int switch_name1(char **dst, char *file, unsigned *f);
-int switch_name2(char **dst, char *file, unsigned *f);
-
-int switch_name(char **dst, char *file, unsigned *f)
+int	switch_name(char **dst, char *file, unsigned int *f)
 {
 	if (!ft_memcmp(file, "NO", 2))
 	{
@@ -62,8 +58,7 @@ int switch_name(char **dst, char *file, unsigned *f)
 	return (0);
 }
 
-
-int switch_name1(char **dst, char *file, unsigned *f)
+int	switch_name1(char **dst, char *file, unsigned int *f)
 {
 	if (!ft_memcmp(file, "SO", 2))
 	{
@@ -90,7 +85,7 @@ int switch_name1(char **dst, char *file, unsigned *f)
 	return (0);
 }
 
-int switch_name2(char **dst, char *file, unsigned *f)
+int	switch_name2(char **dst, char *file, unsigned int *f)
 {
 	if (*file == 'C')
 	{

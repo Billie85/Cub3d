@@ -1,7 +1,8 @@
 #include "../cub3d.h"
+
 unsigned int	flooring(unsigned int set)
 {
-	static unsigned c;
+	static unsigned int	c;
 
 	if (set)
 		c = set;
@@ -10,7 +11,7 @@ unsigned int	flooring(unsigned int set)
 
 unsigned int	ceiling(unsigned int set)
 {
-	static unsigned c;
+	static unsigned int	c;
 
 	if (set)
 		c = set;

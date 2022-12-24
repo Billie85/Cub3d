@@ -21,7 +21,8 @@ void	count_square_map(t_map_info *map)
 
 bool	check_error_inside_map(t_map_info *map)
 {
-	if (map_inside_left(map) && map_inside_right(map) && map_inside_up(map) && map_inside_down(map))
+	if (map_inside_left(map) && map_inside_right(map) && \
+	map_inside_up(map) && map_inside_down(map))
 		return (true);
 	else
 		return (false);
@@ -29,7 +30,8 @@ bool	check_error_inside_map(t_map_info *map)
 
 bool	check_error_around_map(t_map_info *map)
 {
-	if (check_map_top(map) && check_map_under(map) && check_map_left(map) && check_map_right(map))
+	if (check_map_top(map) && check_map_under(map) && \
+	check_map_left(map) && check_map_right(map))
 	{
 		check_error_inside_map(map);
 		return (true);
@@ -40,8 +42,8 @@ bool	check_error_around_map(t_map_info *map)
 
 void	rev_map(char	**map)
 {
-	size_t l;
-	size_t y;
+	size_t	l;
+	size_t	y;
 	char	*buf;
 
 	y = 0;
@@ -62,15 +64,15 @@ void	free_list(void	*vp);
 
 int	map(size_t	x, size_t y, t_map_info *Map)
 {
-	static char	**static_map;
-	static size_t w;
-	static size_t h;
+	static char		**static_map;
+	static size_t	w;
+	static size_t	h;
 
 	if (Map == (t_map_info *) FREE_ALL)
 		free_list((void *)static_map);
 	else if (Map != NULL)
 	{
-		Array_2D(Map);
+		array_2d(Map);
 		static_map = check_direction_map(Map);
 		if (static_map == false)
 			return (false);
@@ -78,7 +80,8 @@ int	map(size_t	x, size_t y, t_map_info *Map)
 		w = Map->square_width;
 		h = Map->square_height;
 		rev_map(static_map);
-		if (check_error_around_map(Map) == false || set_now(static_map) == false)
+		if (check_error_around_map(Map) == false || \
+		set_now(static_map) == false)
 			return (false);
 		return (true);
 	}

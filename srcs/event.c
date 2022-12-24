@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	set_key(int	k, void	*p)
+int	set_key(int k, void *p)
 {
 	(void)p;
 	if (k == W_KEY)
@@ -20,7 +20,7 @@ int	set_key(int	k, void	*p)
 	return (0);
 }
 
-int	rm_key(int	k, void	*p)
+int	rm_key(int k, void *p)
 {
 	(void)p;
 	if (k == W_KEY || k == S_KEY || k == A_KEY || k == D_KEY)
@@ -30,11 +30,10 @@ int	rm_key(int	k, void	*p)
 	return (0);
 }
 
-int		end_cub(void	*p)
+int	end_cub(void *p)
 {
 	(void)p;
 	dis(0, 0, 0, (int) FREE_ALL);
 	map(0, 0, (void *)FREE_ALL);
 	exit(0);
 }
-

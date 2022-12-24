@@ -1,8 +1,8 @@
 #include "../cub3d.h"
 
-t_now 	now(t_now *set)
+t_now	now(t_now *set)
 {
-	static t_now n;
+	static t_now	n;
 
 	if (set)
 	{

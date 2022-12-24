@@ -1,8 +1,8 @@
 #include "../cub3d.h"
 
-unsigned 	key(unsigned set)
+unsigned int	key(unsigned int set)
 {
-	static unsigned k;
+	static unsigned int	k;
 
 	if (set & GO_)
 	{

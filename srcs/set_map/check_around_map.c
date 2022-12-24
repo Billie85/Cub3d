@@ -10,9 +10,11 @@ bool	check_map_right(t_map_info *map)
 	x = map->square_width -2;
 	while (map->new_map_square[y])
 	{
-		if (map->new_map_square[y][x] == '1' || map->new_map_square[y][x] == ' ')
+		if (map->new_map_square[y][x] == '1' \
+		|| map->new_map_square[y][x] == ' ')
 			flag = true;
-		else if (map->new_map_square[y][x] != '1' || map->new_map_square[y][x] != ' ')
+		else if (map->new_map_square[y][x] != '1' \
+		|| map->new_map_square[y][x] != ' ')
 			flag = false;
 		if (flag == false)
 			return (false);
@@ -38,7 +40,8 @@ bool	check_map_left(t_map_info *map)
 		if (map->new_map_square[y][x] == '1' || \
 			map->new_map_square[y][x] == ' ')
 			flag = true;
-		else if (map->new_map_square[y][x] != '1' || map->new_map_square[y][x] != ' ')
+		else if (map->new_map_square[y][x] != '1' \
+		|| map->new_map_square[y][x] != ' ')
 			flag = false;
 		if (flag == false)
 			return (false);

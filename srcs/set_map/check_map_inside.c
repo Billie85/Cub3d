@@ -1,7 +1,7 @@
 #include "set_map.h"
 
-int is_space(char c);
-int is_map_elm(char c);
+int	is_space(char c);
+int	is_map_elm(char c);
 
 bool	map_inside_down(t_map_info *map)
 {

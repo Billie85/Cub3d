@@ -1,6 +1,6 @@
 #include "set_map.h"
 
-void	Array_2D(t_map_info *map)
+void	array_2d(t_map_info *map)
 {
 	char	**buff;
 	size_t	len;
@@ -9,9 +9,6 @@ void	Array_2D(t_map_info *map)
 
 	x = 0;
 	y = 0;
-	map->height = 0;
-	map->max_height = 0;
-	map->max_width = 0;
 	map->line = get_next_line(map->fd);
 	while (map->line != NULL)
 	{

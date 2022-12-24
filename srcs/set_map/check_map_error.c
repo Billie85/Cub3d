@@ -1,6 +1,6 @@
 #include "set_map.h"
 
-int check_direction_map_while(t_map_info *map, size_t y, size_t *flag);
+int		check_direction_map_while(t_map_info *map, size_t y, size_t *flag);
 char	**check_direction_map1(t_map_info *map, size_t y, size_t *flag);
 
 char	**check_direction_map(t_map_info *map)
@@ -14,7 +14,7 @@ char	**check_direction_map(t_map_info *map)
 	while (map->array_2d[y])
 	{
 		if (check_direction_map_while(map, y, flag))
-			break;
+			break ;
 		if (flag[6])
 			return (false);
 		y++;
@@ -22,7 +22,7 @@ char	**check_direction_map(t_map_info *map)
 	return (check_direction_map1(map, y, flag));
 }
 
-int check_direction_map_while(t_map_info *map, size_t y, size_t *flag)
+int	check_direction_map_while(t_map_info *map, size_t y, size_t *flag)
 {
 	size_t	x;
 
@@ -41,8 +41,8 @@ int check_direction_map_while(t_map_info *map, size_t y, size_t *flag)
 		flag[6] = flag[4]++;
 	else if (ft_memcmp(map->array_2d[y] + x, "C", ft_strlen("C")) == 0)
 		flag[6] = flag[5]++;
-	else if (ft_strchr(map->array_2d[y] + x , '1') || \
-		ft_strchr(map->array_2d[y] + x , '0'))
+	else if (ft_strchr(map->array_2d[y] + x, '1') || \
+	ft_strchr(map->array_2d[y] + x, '0'))
 		return (1);
 	return (0);
 }
@@ -61,7 +61,7 @@ char	**check_direction_map1(t_map_info *map, size_t y, size_t *flag)
 		y++;
 	}
 	map->new_map_square[new_y] = NULL;
-	if(!(flag[0] && flag[1] && flag[2] && flag[3] && flag[4] && flag[5]))
+	if (!(flag[0] && flag[1] && flag[2] && flag[3] && flag[4] && flag[5]))
 		return (false);
 	else
 		return (map->new_map_square);

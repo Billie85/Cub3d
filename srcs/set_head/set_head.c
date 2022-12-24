@@ -1,15 +1,15 @@
 #include "../cub3d.h"
 
-char *read_file(int fd, size_t B);
-int img_mame(char **dst , char *file);
-int set_img(char **name, unsigned *imgs);
-int set_cf(char **str);
+char	*read_file(int fd, size_t B);
+int		img_mame(char **dst, char *file);
+int		set_img(char **name, unsigned int *imgs);
+int		set_cf(char **str);
 
-int set_head(char *file)
+int	set_head(char *file)
 {
-	int fd;
-	char *name[7];
-	unsigned imgs[BL * BL * 4];
+	int				fd;
+	char			*name[7];
+	unsigned int	imgs[BL * BL * 4];
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
@@ -28,12 +28,11 @@ int set_head(char *file)
 	return (0);
 }
 
-
-char *read_file(int fd, size_t B)
+char	*read_file(int fd, size_t B)
 {
-	ssize_t l;
-	char s[BUFER_SIZE];
-	char *r;
+	ssize_t	l;
+	char	s[BUFER_SIZE];
+	char	*r;
 
 	l = read(fd, s, BUFER_SIZE);
 	if (l < 0)
@@ -48,5 +47,5 @@ char *read_file(int fd, size_t B)
 	r = read_file(fd, B + l);
 	if (r)
 		ft_memcpy(r + B, s, l);
-	return (r);	
+	return (r);
 }

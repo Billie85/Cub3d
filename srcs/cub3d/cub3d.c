@@ -1,6 +1,10 @@
 #include "../cub3d.h"
 
-int		cub3d(void	*p)
+void	move1(t_now *n);
+void	cast_line(t_now *n, t_line *l);
+void	dis_line(t_line *l, size_t i);
+
+int	cub3d(void	*p)
 {
 	(void)p;
 	move();
@@ -8,20 +12,19 @@ int		cub3d(void	*p)
 	return (0);
 }
 
-void move1(t_now *n);
-void move()
+void	move(void)
 {
-	double ra;
-	t_now n;
+	double	ra;
+	t_now	n;
 
 	n = now(0);
 	if ((key(0) & GO_) == GO_F)
 		ra = 0;
 	else if ((key(0) & GO_) == GO_L)
 		ra = 0.5;
-	else if ((key(0) & GO_) == GO_B) 
+	else if ((key(0) & GO_) == GO_B)
 		ra = 1;
-	else if ((key(0) & GO_) == GO_R) 
+	else if ((key(0) & GO_) == GO_R)
 		ra = 1.5;
 	if ((key(0) & GO_) != GO_NONE)
 	{
@@ -31,7 +34,7 @@ void move()
 	move1(&n);
 }
 
-void move1(t_now *n)
+void	move1(t_now *n)
 {
 	if ((key(0) & TRN_) == TRN_L)
 		n->r += TRN_LEN;
@@ -44,13 +47,10 @@ void move1(t_now *n)
 	*n = now(n);
 }
 
-void cast_line(t_now *n, t_line *l);
-void dis_line(t_line *l, size_t i);
-
-void cast()
+void	cast(void)
 {
-	size_t i;
-	t_now n;
+	size_t	i;
+	t_now	n;
 	t_line	l;
 
 	n = now(0);
@@ -65,12 +65,11 @@ void cast()
 		cast_line(&n, &l);
 		l.far *= cos((now(0).r - n.r) * M_PI);
 		if (l.far < 0)
-		 	l.far *= -1;
+			l.far *= -1;
 		dis_line(&l, i);
 		n.r -= SEE / DIS_W;
 		i++;
 	}
- 
 	dis(0, 0, 0, FLUSH);
 	return ;
 }

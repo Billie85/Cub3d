@@ -45,10 +45,10 @@
 # define SOUTH 2
 # define WEST 3
 
-#define BLOCK 1
-#define SPACE 2
-#define NONE 3
-#define MAP_ERROR 4
+# define BLOCK 1
+# define SPACE 2
+# define NONE 3
+# define MAP_ERROR 4
 
 # define CLOR 2
 # define FLUSH 3
@@ -56,90 +56,55 @@
 # define SET 0xf
 # define FREE_ALL ~0LU
 
-#define MINI_NUM 0.000000000000001
+# define MINI_NUM 0.000000000000001
 
-#define BUFER_SIZE 1024
+# define BUFER_SIZE 1024
 
 typedef struct s_now
 {
-    double  x;
-    double  y;
-    double  r;
+	double	x;
+	double	y;
+	double	r;
 }t_now;
 
 typedef struct s_line
 {
-    unsigned data[BL];
-    double far;
+	unsigned	data[BL];
+	double		far;
 }t_line;
 
 typedef struct s_f
 {
-    double a;
-    double b;
+	double	a;
+	double	b;
 }t_f;
 
+int				setting(char *file);
+char			**split_line(const char *str, size_t header);
 
-int setting(char *file);
-char **split_line(const char *str, size_t header);
+typedef struct s_map_info	t_map_info;
 
+void			*mlx(void *set);
+void			*win(void *set);
 
-//global
-
-typedef struct s_map_info t_map_info;
-
-void	*mlx(void *set);
-void	*win(void *set);
-unsigned 	key(unsigned set);
-t_now 	now(t_now *set);
-void 	img(int flag, size_t len, unsigned *io);
-int	map(size_t	x, size_t y, t_map_info *Map);
-void    dis(size_t x, size_t y, unsigned c, int f);
+unsigned int	key(unsigned int set);
+t_now			now(t_now *set);
+void			img(int flag, size_t len, unsigned int *io);
+int				map(size_t x, size_t y, t_map_info *Map);
+void			dis(size_t x, size_t y, unsigned int c, int f);
 unsigned int	flooring(unsigned int set);
 unsigned int	ceiling(unsigned int set);
 
+int				set_head(char *file);
 
-int set_head(char *file);
+int				set_key(int key, void *p);
+int				rm_key(int key, void *p);
 
+int				cub3d(void	*p);
+void			move(void);
+void			cast(void);
+void			cast_line(t_now *n, t_line *l);
 
-
-int		set_key(int	key, void	*p);
-int		rm_key(int	key, void	*p);
-
-int		cub3d(void	*p);
-void move();
-void cast();
-void cast_line(t_now *n, t_line *l);
-
-
-int		end_cub(void	*p);
+int				end_cub(void	*p);
 
 #endif 
-
-/* 
-#ifndef DEBUG_H
-#define DEBUG_H
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/time.h>
-#define TEST printf("[(%s/%d) %s ]\n", __FILE__, __LINE__, __func__); fflush(stdin);
-#define TEST_ printf("---------------------------------------------[(%s/%d) %s ]\n", __FILE__, __LINE__, __func__); fflush(stdin);
-#define TESTn(i) printf("[(%s/%d) %s ]%s:%ld\n", __FILE__, __LINE__, __func__, #i, (long)(i)); fflush(stdin);
-#define TESTu(i) printf("[(%s/%d) %s ]%s:%lu\n", __FILE__, __LINE__, __func__, #i, (unsigned long)(i)); fflush(stdin);
-#define TESTx(i) printf("[(%s/%d) %s ]%s:%lx\n", __FILE__, __LINE__, __func__, #i, (unsigned long)(i)); fflush(stdin);
-#define TESTd(i) printf("[(%s/%d) %s ]%s:%lf\n", __FILE__, __LINE__, __func__, #i, (double)(i)); fflush(stdin);
-#define TESTp(i) printf("[(%s/%d) %s ]%s:%p\n", __FILE__, __LINE__, __func__, #i, (void *)(i)); fflush(stdin);
-#define TESTs(i) printf("[(%s/%d) %s ]%s:%s\n", __FILE__, __LINE__, __func__, #i, (char *)(i)); fflush(stdin);
-#define TESTc(i) printf("[(%s/%d) %s ]%s:%c\n", __FILE__, __LINE__, __func__, #i, (char)(i)); fflush(stdin);
-#define FORn(i,j) {printf("[(%s/%d) %s ]%s:",  __FILE__, __LINE__, __func__, #i);if(i){for(size_t test_arg = 0; test_arg < j; test_arg++){printf("[%zu]%ld, ", test_arg, (long)(i[test_arg]));}}else{printf("NULL");}printf("\n");fflush(stdin);}
-#define FORu(i,j) {printf("[(%s/%d) %s ]%s:",  __FILE__, __LINE__, __func__, #i);if(i){for(size_t test_arg = 0; test_arg < j; test_arg++){printf("[%zu]%lu, ", test_arg, (unsigned long)(i[test_arg]));}}else{printf("NULL");}printf("\n");fflush(stdin);}
-#define FORx(i,j) {printf("[(%s/%d) %s ]%s:",  __FILE__, __LINE__, __func__, #i);if(i){for(size_t test_arg = 0; test_arg < j; test_arg++){printf("[%zu]%lx, ", test_arg, (unsigned long)(i[test_arg]));}}else{printf("NULL");}printf("\n");fflush(stdin);}
-#define FORd(i,j) {printf("[(%s/%d) %s ]%s:",  __FILE__, __LINE__, __func__, #i);if(i){for(size_t test_arg = 0; test_arg < j; test_arg++){printf("[%zu]%lf, ", test_arg, (double)(i[test_arg]));}}else{printf("NULL");}printf("\n");fflush(stdin);}
-#define FORp(i) {printf("[(%s/%d) %s ]%s:",  __FILE__, __LINE__, __func__, #i);if(i){for(size_t test_arg = 0; (i)[test_arg]; test_arg++){printf("[%zu]%p, ", test_arg, (void *)(i[test_arg]));}}else{printf("NULL");}printf("\n");fflush(stdin);}
-#define FORs(i) {printf("[(%s/%d) %s ]%s:",  __FILE__, __LINE__, __func__, #i);if(i){for(size_t test_arg = 0; (i)[test_arg]; test_arg++){printf("[%zu]%s, ", test_arg, (char *)(i[test_arg]));}}else{printf("NULL");}printf("\n");fflush(stdin);}
-#define FORc(i) {printf("[(%s/%d) %s ]%s:",  __FILE__, __LINE__, __func__, #i);if(i){for(size_t test_arg = 0; (i)[test_arg]; test_arg++){printf("[%zu]%c, ", test_arg, (char)(i[test_arg]));}}else{printf("NULL");}printf("\n");fflush(stdin);}
-#define TAKE(i,j) {static size_t test_arg = 0; if(!(test_arg % j)){i} test_arg++;}
-#define STOP {char c; read(STDIN_FILENO, &c, sizeof(char));}
-
-#endif
- */
