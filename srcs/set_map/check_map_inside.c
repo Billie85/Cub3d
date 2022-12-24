@@ -35,10 +35,7 @@ bool	map_inside_down(t_map_info *map)
 		}
 		y++;
 	}
-	if (flag == false)
-		return (false);
-	else
-		return (true);
+	return (flag);
 }
 
 bool	map_inside_up(t_map_info *map)
@@ -67,11 +64,8 @@ bool	map_inside_up(t_map_info *map)
 		}
 		y++;
 	}
-	if (flag == false)
-		return (false);
-	else
-		return (true);
-}//25
+	return (flag);
+}
 
 bool	map_inside_right(t_map_info *map)
 {
@@ -99,11 +93,8 @@ bool	map_inside_right(t_map_info *map)
 		}
 		y++;
 	}
-	if (flag == false)
-		return (false);
-	else
-		return (true);
-}//25
+	return (flag);
+}
 
 bool	map_inside_left(t_map_info *map)
 {
@@ -131,8 +122,5 @@ bool	map_inside_left(t_map_info *map)
 		}
 		y++;
 	}
-	if (flag == false)
-		return (false);
-	else
-		return (true);
-}//25
+	return (flag);
+}

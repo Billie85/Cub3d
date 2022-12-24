@@ -5,8 +5,6 @@ int set_map(char *file);
 
 int	main(int argc, char *argv[])
 {
-	void	*buf;
-
 	if (argc != 2)
 		return(printf("Error\n") * 0 + 1);
 	mlx(mlx_init());

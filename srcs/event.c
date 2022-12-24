@@ -2,8 +2,6 @@
 
 int	set_key(int	k, void	*p)
 {
-	unsigned i;
-
 	(void)p;
 	if (k == W_KEY)
 		key(GO_F);
@@ -24,6 +22,7 @@ int	set_key(int	k, void	*p)
 
 int	rm_key(int	k, void	*p)
 {
+	(void)p;
 	if (k == W_KEY || k == S_KEY || k == A_KEY || k == D_KEY)
 		key(GO_NONE);
 	else if (k == TL_KEY || k == TR_KEY)
@@ -33,6 +32,7 @@ int	rm_key(int	k, void	*p)
 
 int		end_cub(void	*p)
 {
+	(void)p;
 	dis(0, 0, 0, (int) FREE_ALL);
 	map(0, 0, (void *)FREE_ALL);
 	exit(0);

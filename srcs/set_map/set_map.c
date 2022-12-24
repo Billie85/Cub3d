@@ -3,7 +3,6 @@
 int	set_map(char *file_name)
 {
 	t_map_info	*Map;
-	int		return_value;
 	size_t	i;
 	bool	r;
 

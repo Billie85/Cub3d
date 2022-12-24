@@ -2,7 +2,6 @@
 
 void	count_square_map(t_map_info *map)
 {
-	size_t	x;
 	size_t	y;
 	size_t	len;
 
@@ -63,7 +62,6 @@ void	free_list(void	*vp);
 
 int	map(size_t	x, size_t y, t_map_info *Map)
 {
-	size_t	i;
 	static char	**static_map;
 	static size_t w;
 	static size_t h;
