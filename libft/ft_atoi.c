@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include <limits.h>
+
 int			set(const char	*str, int	*j);
-long int	ten_times(long	n);
+long int	ten_times(long n);
 
 int	ft_atoi(const char	*str)
 {

@@ -12,7 +12,7 @@
 
 #include <unistd.h>
 
-void	ft_putnbr_fd(int	n, int	fd)
+void	ft_putnbr_fd(int n, int fd)
 {
 	int		s;
 	int		i;
@@ -38,29 +38,3 @@ void	ft_putnbr_fd(int	n, int	fd)
 	m[i] = 0;
 	write(fd, m, i * sizeof(char));
 }
-/*
-void	ft_putnbr_fd(int	n, int	fd)
-{
-	long int	ln;
-	int			i;
-	char		c;
-
-	ln = n;
-	if (ln < 0)
-	{
-		ln *= -1;
-		write(fd, "-", 1);
-	}
-	i = 1;
-	while (ln / i >= 10)
-		i *= 10;
-	while (i)
-	{
-		c = ln / i + '0';
-		ln -= (c - '0') * i;
-		write(fd, &c, 1);
-		i /= 10;
-	}
-	write(fd, "\n", 1);
-}
- */

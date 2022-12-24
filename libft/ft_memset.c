@@ -12,7 +12,7 @@
 
 #include <stddef.h>
 
-void	*ft_memset(void	*buf, int	ch, size_t	n)
+void	*ft_memset(void *buf, int ch, size_t n)
 {
 	size_t	i;
 

@@ -12,9 +12,10 @@
 
 #include <stddef.h>
 #include <stdlib.h>
-void	mk_number(char	*m, int	*n, int	*i);
 
-char	*ft_itoa(int	n)
+void	mk_number(char *m, int *n, int *i);
+
+char	*ft_itoa(int n)
 {
 	char	m[12];
 	int		i;

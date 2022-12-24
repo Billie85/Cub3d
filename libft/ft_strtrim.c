@@ -12,6 +12,7 @@
 
 #include <stddef.h>
 #include <stdlib.h>
+
 int		check(char c, char const	*set);
 void	trimcpy(char *s, char const *t, size_t start, size_t end);
 

@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int	c)
+int	ft_toupper(int c)
 {
-	int	atoA;
+	int	stob;
 
-	atoA = 'A' - 'a';
+	stob = 'A' - 'a';
 	if (c >= 'a' && c <= 'z')
-		c += atoA;
+		c += stob;
 	return (c);
 }

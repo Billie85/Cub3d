@@ -12,6 +12,7 @@
 
 #include <stddef.h>
 #include <stdlib.h>
+
 size_t	count_long(char const *s);
 
 char	*ft_strjoin(char const	*s1, char const	*s2)

@@ -12,6 +12,7 @@
 
 #include <stddef.h>
 #include <stdlib.h>
+
 void	next_comand(char const *s, char c, char ***p, size_t *info);
 void	split_turn(char const *s, char c, char **p, size_t *info);
 void	contents_turn(char const *s, char c, char **p, size_t *info);
@@ -43,7 +44,7 @@ char	**ft_split(char const *s, char c)
 	while (!info[EXIT] && info[COMAND] < 3)
 	{
 		info[STR_No] = 0;
-		while (*(s + info[STR_No]) &&*(s + info[STR_No]) == c)
+		while (*(s + info[STR_No]) && *(s + info[STR_No]) == c)
 			info[STR_No]++;
 		info[LIST_No] = 0;
 		while (!info[EXIT] && *(s + info[STR_No]))

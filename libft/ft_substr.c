@@ -12,9 +12,10 @@
 
 #include <stddef.h>
 #include <stdlib.h>
+
 char	*nothing(void);
 
-char	*ft_substr(char const	*s, unsigned int	start, size_t	len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*c;
 	size_t	i;

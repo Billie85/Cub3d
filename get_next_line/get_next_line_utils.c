@@ -47,7 +47,8 @@ char	*new_string(char *s1, char *s2)
 	size_t	i_s2;
 	size_t	i_new;
 
-	new_s = (char *)malloc(sizeof(char) * (gnl_strlen(s1) + gnl_strlen(s2) + 1));
+	new_s = (char *)malloc(sizeof(char) * \
+	(gnl_strlen(s1) + gnl_strlen(s2) + 1));
 	if (new_s == NULL)
 		return (NULL);
 	i_s1 = 0;

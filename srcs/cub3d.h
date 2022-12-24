@@ -116,7 +116,7 @@ int		end_cub(void	*p);
 
 #endif 
 
-
+/* 
 #ifndef DEBUG_H
 #define DEBUG_H
 #include <stdio.h>
@@ -142,3 +142,4 @@ int		end_cub(void	*p);
 #define STOP {char c; read(STDIN_FILENO, &c, sizeof(char));}
 
 #endif
+ */

@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_tolower(int	c)
+int	ft_tolower(int c)
 {
-	int	Atoa;
+	int	btos;
 
-	Atoa = 'a' - 'A';
+	btos = 'a' - 'A';
 	if (c >= 'A' && c <= 'Z')
-		c += Atoa;
+		c += btos;
 	return (c);
 }
