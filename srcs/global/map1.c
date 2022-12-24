@@ -6,7 +6,7 @@
 /*   By: blyu <blyu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 05:39:17 by blyu              #+#    #+#             */
-/*   Updated: 2022/12/25 05:39:18 by blyu             ###   ########.fr       */
+/*   Updated: 2022/12/25 06:30:09 by blyu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,9 @@ bool	check_error_inside_map(t_map_info *map)
 bool	check_error_around_map(t_map_info *map)
 {
 	if (check_map_top(map) && check_map_under(map) && \
-	check_map_left(map) && check_map_right(map))
-	{
-		check_error_inside_map(map);
+	check_map_left(map) && check_map_right(map) && \
+	check_error_inside_map(map))
 		return (true);
-	}
 	else
 		return (false);
 }
