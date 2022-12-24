@@ -1,6 +1,6 @@
 #include "set_map.h"
 
-void	Array_2D(t_map_info *map)//25
+void	Array_2D(t_map_info *map)
 {
 	char	**buff;
 	size_t	len;

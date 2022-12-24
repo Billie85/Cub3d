@@ -23,10 +23,7 @@ void	count_square_map(t_map_info *map)
 bool	check_error_inside_map(t_map_info *map)
 {
 	if (map_inside_left(map) && map_inside_right(map) && map_inside_up(map) && map_inside_down(map))
-	{
-		printf("MAP IS OKAY\n");
 		return (true);
-	}
 	else
 		return (false);
 }
@@ -61,97 +58,8 @@ void	rev_map(char	**map)
 	}
 }
 
-int	setting_now1(char *c, int *f, t_now *n);
-int	setting_now2(char *c);
-
-int	setting_now(char *c, int *f, t_now 	*n)
-{
-	if (*c == 'N')
-	{
-		if (*f)
-			return(1);
-		*f = 1;
-		*c = SPACE;
-		n->r = 0.5;
-		now(n);
-	}
-	else if (*c == 'E')
-	{
-		if (*f)
-			return(1);
-		*f = 1;
-		*c = SPACE;
-		n->r = 1.0;
-		now(n);
-	}
-	else 
-		return (setting_now1(c, f, n));
-	return (0);
-}
-
-int	setting_now1(char *c, int *f, t_now 	*n)
-{
-	if (*c == 'S')
-	{
-		if (*f)
-			return(1);
-		*f = 1;
-		*c = SPACE;
-		n->r = 1.5;
-		now(n);
-	}
-	else if (*c == 'W')
-	{
-		if (*f)
-			return(1);
-		*f = 1;
-		*c = SPACE;
-		n->r = 0.0;
-		now(n);
-	}else
-		return (setting_now2(c));
-	return (0);
-}
-
-int	setting_now2(char *c)
-{
-	if (*c == '0')
-		*c = SPACE;
-	else if (*c == '1')
-		*c = BLOCK;
-	else if (*c == ' ')
-		*c = NONE;
-	else
-		return (1);
-	return (0);
-}
-
-
-bool	set_now(char	**map)
-{
-	size_t	x;
-	size_t	y;
-	int		f;
-	t_now 	n;
-
-	f = 0;
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			n.x = (double)x + 0.5;
-			n.y = (double)y + 0.5;
-			if (setting_now(&map[y][x], &f, &n))
-				return (false);
-			x++;
-		}
-		y++;
-	}
-	return (true);
-}
-
+bool	set_now(char	**map);
+void	free_list(void	*vp);
 
 int	map(size_t	x, size_t y, t_map_info *Map)
 {
@@ -161,25 +69,13 @@ int	map(size_t	x, size_t y, t_map_info *Map)
 	static size_t h;
 
 	if (Map == (t_map_info *) FREE_ALL)
-	{	
-		i = 0;
-		while (static_map[i])
-		{
-			free(static_map[i]);
-			i++;
-		}
-		free(static_map);
-		return (0);
-	}
+		free_list((void *)static_map);
 	else if (Map != NULL)
 	{
 		Array_2D(Map);
 		static_map = check_direction_map(Map);
 		if (static_map == false)
-		{
-			printf(RED"ERROR\n"BACK);
 			return (false);
-		}
 		count_square_map(Map);
 		w = Map->square_width;
 		h = Map->square_height;

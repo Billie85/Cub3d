@@ -4,18 +4,24 @@ int	set_map(char *file_name)
 {
 	t_map_info	*Map;
 	int		return_value;
-	size_t		x;
-	size_t		y;
+	size_t	i;
+	bool	r;
 
-	x = 1;
-	y = 1;
 	Map = (t_map_info *)malloc(sizeof(t_map_info));
 	Map->fd = open(file_name, O_RDONLY);
 	Map->array_2d = (char **)malloc(sizeof(char *));
-	if(map (0, 0, Map) == false)
-		return (1);
-		else
-			return (0);
+	r = map (0, 0, Map);
 	close(Map->fd);
-	return (0);
+	i = 0;
+	while (Map->array_2d[i])
+	{
+		free(Map->array_2d[i]);
+		i++;
+	}
+	free(Map->array_2d);
+	free(Map);
+	if(r == false)
+		return (1);
+	else
+		return (0);
 }

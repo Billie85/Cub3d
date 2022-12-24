@@ -45,7 +45,7 @@ typedef struct s_map_info
 	char	*file_name;
 }t_map_info;
 
-int	map(size_t	x, size_t y, t_map_info *ch);
+int		map(size_t	x, size_t y, t_map_info *ch);
 void	Array_2D(t_map_info *map);
 void	make_square(t_map_info * map);
 void	remove_new_line(t_map_info *map);

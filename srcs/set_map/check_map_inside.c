@@ -1,4 +1,13 @@
 #include "set_map.h"
+int is_space(char c)
+{
+	return (c == '0' || c == 'N' || c == 'W' || c == 'S' || c == 'E');
+}
+
+int is_map_elm(char c)
+{
+	return (c == '1' || is_space(c));
+}
 
 bool	map_inside_down(t_map_info *map)
 {
@@ -13,18 +22,9 @@ bool	map_inside_down(t_map_info *map)
 		x = 1;
 		while (map->new_map_square[y][x])
 		{
-			if (map->new_map_square[y][x] == '0' || \
-				map->new_map_square[y][x] == 'N' || \
-				map->new_map_square[y][x] == 'W' || \
-				map->new_map_square[y][x] == 'S' || \
-				map->new_map_square[y][x] == 'E')
+			if (is_space(map->new_map_square[y][x]))
 			{
-				if (map->new_map_square[y + 1][x] == '1' || \
-					map->new_map_square[y + 1][x] == '0' || \
-					map->new_map_square[y + 1][x] == 'N' || \
-					map->new_map_square[y + 1][x] == 'W' || \
-					map->new_map_square[y + 1][x] == 'S' || \
-					map->new_map_square[y + 1][x] == 'E')
+				if (is_map_elm(map->new_map_square[y + 1][x]))
 					flag = true;
 				else
 					flag = false;
@@ -54,17 +54,9 @@ bool	map_inside_up(t_map_info *map)
 		x = 1;
 		while (map->new_map_square[y][x])
 		{
-			if (map->new_map_square[y][x] == '0' || \
-			map->new_map_square[y][x] == 'N' || \
-			map->new_map_square[y][x] == 'W' || \
-			map->new_map_square[y][x] == 'S' || \
-			map->new_map_square[y][x] == 'E')
+			if (is_space(map->new_map_square[y][x]))
 			{
-				if (map->new_map_square[y - 1][x] == '1' || map->new_map_square[y - 1][x] == '0' || \
-				map->new_map_square[y - 1][x] == 'N' || \
-				map->new_map_square[y - 1][x] == 'W' || \
-				map->new_map_square[y - 1][x] == 'S' || \
-				map->new_map_square[y - 1][x] == 'E')
+				if (is_map_elm(map->new_map_square[y - 1][x]))
 					flag = true;
 				else
 					flag = false;
@@ -94,17 +86,9 @@ bool	map_inside_right(t_map_info *map)
 		x = 1;
 		while (map->new_map_square[y][x])
 		{
-			if (map->new_map_square[y][x] == '0' || \
-				map->new_map_square[y][x] == 'N' || \
-				map->new_map_square[y][x] == 'W' || \
-				map->new_map_square[y][x] == 'S' || \
-				map->new_map_square[y][x] == 'E')
+			if (is_space(map->new_map_square[y][x]))
 			{
-				if (map->new_map_square[y][x + 1] == '1' || map->new_map_square[y][x + 1] == '0' || \
-				map->new_map_square[y][x + 1] == 'N' || \
-				map->new_map_square[y][x + 1] == 'W' || \
-				map->new_map_square[y][x + 1] == 'S' || \
-				map->new_map_square[y][x + 1] == 'E')
+				if (is_map_elm(map->new_map_square[y][x + 1]))
 					flag = true;
 				else
 					flag = false;
@@ -134,18 +118,9 @@ bool	map_inside_left(t_map_info *map)
 		x = 1;
 		while (map->new_map_square[y][x])
 		{
-			if (map->new_map_square[y][x] == '0' || \
-				map->new_map_square[y][x] == 'N' || \
-				map->new_map_square[y][x] == 'W' || \
-				map->new_map_square[y][x] == 'S' || \
-				map->new_map_square[y][x] == 'E')
+			if (is_space(map->new_map_square[y][x]))
 			{
-				if (map->new_map_square[y][x -1] == '1' || \
-					map->new_map_square[y][x - 1] == '0' || \
-					map->new_map_square[y][x - 1] == 'N' || \
-					map->new_map_square[y][x - 1] == 'W' || \
-					map->new_map_square[y][x - 1] == 'S' || \
-					map->new_map_square[y][x - 1] == 'E')
+				if (is_map_elm(map->new_map_square[y][x -1]))
 					flag = true;
 				else
 					flag = false;
