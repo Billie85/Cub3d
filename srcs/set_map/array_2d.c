@@ -4,7 +4,6 @@ void	Array_2D(t_map_info *map)//25
 {
 	char	**buff;
 	size_t	len;
-	size_t	len01;
 	size_t	x;
 	size_t	y;
 

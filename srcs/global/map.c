@@ -22,78 +22,24 @@ void	count_square_map(t_map_info *map)
 
 bool	check_error_inside_map(t_map_info *map)
 {
-	if (map_inside_left(map) == true)
+	if (map_inside_left(map) && map_inside_right(map) && map_inside_up(map) && map_inside_down(map))
 	{
-		if (map_inside_right(map) == true)
-		{
-			if (map_inside_up(map) == true)
-			{
-				if (map_inside_down(map) == true)
-				{
-					printf("MAP IS OKAY\n");
-					return (true);
-				}
-				else
-				{
-					printf(RED"6ERROR\n"BACK);
-					return (false);
-				}
-			}
-			else
-			{
-				printf(RED"7ERROR\n"BACK);
-				return (false);
-			}
-		}
-		else
-		{
-			printf(RED"8ERROR\n"BACK);
-				return (false);
-		}
+		printf("MAP IS OKAY\n");
+		return (true);
 	}
 	else
-	{
-		printf(RED"9ERROR\n"BACK);
-				return (false);
-	}
+		return (false);
 }
 
 bool	check_error_around_map(t_map_info *map)
 {
-	if (check_map_top(map) == true)
+	if (check_map_top(map) && check_map_under(map) && check_map_left(map) && check_map_right(map))
 	{
-		if (check_map_under(map) == true)
-		{
-			if (check_map_left(map) == true)
-			{
-				if (check_map_right(map) == true)
-				{
-					check_error_inside_map(map);
-				}
-				else
-				{
-					printf(RED"1ERROR\n"BACK);
-					return (false);
-				}
-			}
-			else
-			{
-				printf(RED"2ERROR\n"BACK);
-				return (false);
-			}
-		}
-		else
-		{
-			printf(RED"3ERROR\n"BACK);
-			return (false);
-		}
+		check_error_inside_map(map);
+		return (true);
 	}
 	else
-	{
-		printf(RED"4ERROR\n"BACK);
 		return (false);
-	}
-	return (true);
 }
 
 void	rev_map(char	**map)
@@ -203,11 +149,6 @@ bool	set_now(char	**map)
 		}
 		y++;
 	}
-if (f == 0)
-{
-	TEST
-	STOP
-}
 	return (true);
 }
 
@@ -219,19 +160,6 @@ int	map(size_t	x, size_t y, t_map_info *Map)
 	static size_t w;
 	static size_t h;
 
-/* if (Map == (t_map_info *) 42)
-{
-	for (size_t y = 0; static_map[y]; y++)
-	{
-		for (size_t x = 0; static_map[y][x]; x++)
-		{
-			printf("%d,", static_map[y][x]);
-		}
-		printf("\n");
-	}
-	return (0);
-}
- */
 	if (Map == (t_map_info *) FREE_ALL)
 	{	
 		i = 0;

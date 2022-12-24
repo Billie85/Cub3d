@@ -1,5 +1,4 @@
 #include "cub3d.h"
-wa www;/* test */
 
 int set_head(char *file);
 int set_map(char *file);
@@ -13,13 +12,12 @@ int	main(int argc, char *argv[])
 	mlx(mlx_init());
 	win(mlx_new_window(mlx(0), DIS_W, DIS_H, "cub3d"));
 	if (set_head(argv[1]) || set_map(argv[1]))
+	{
+		printf ("ERROR\n");
 		return (1);
+	}
 	dis(0, 0, 0, SET);
-
-	//map(0,0,42);
 	key(GO_NONE | TRN_NONE);
-TESTx(ceiling(0))
-TESTx(flooring(0))
 	mlx_loop_hook(mlx(0), cub3d, NULL);
 	mlx_hook(win(0), 2, 0, set_key, NULL);
 	mlx_hook(win(0), 3, 0, rm_key, NULL);
@@ -262,7 +260,6 @@ int set_cf(char **str)
 			(ii < 2 && str[i][l] != ',') || (ii == 2 && str[i][l] != '\0'))
 				return (1);
 			n |= ft_atoi(str[i]) << (2 - ii) * 8;
-TESTx(n)
 			str[i] += l + 1;
 			ii++;
 		}
@@ -275,14 +272,8 @@ TESTx(n)
 void	set_cf1(size_t	i, unsigned n)
 {
 	if (i == 4)
-{
-TESTx(n)
 		ceiling(n);
-}
 	else
-{
-TESTx(n)
-}
 		flooring(n);
 }
 
@@ -357,80 +348,6 @@ void cast()
 		if (l.far < 0)
 		 	l.far *= -1;
 		dis_line(&l, i);
-/* */
-double xl, yl, xr, yr, xc, yc;
-double rl, rr, rc;
-if (!i)
-{
-rl = n.r;
-xl = www.x;
-yl = www.y;
-}
-if (i == DIS_W / 2 - 1)
-{
-rc = n.r;
-xc = www.x;
-yc = www.y;
-}
-if (i == DIS_W - 1)
-{
-rr = n.r;
-xr = www.x;
-yr = www.y;
-}
-if(i == DIS_W - 1)
-{
-size_t y = 0;
-size_t x = 0;
-	for (; map(0,y,0) != MAP_ERROR; y++)
-	{
-	x = 0;
-	for (; map(x,y,0) != MAP_ERROR; x++)
-	{
-		switch (map(x,y,0))
-		{
-		case BLOCK:
-			if (x == floor(xc) && y == floor(yc))
-			printf("*");
-			else if (x == floor(xl) && y == floor(yl))
-			printf("L");
-			else if (x == floor(xr) && y == floor(yr))
-			printf("R");
-			else
-			printf("#");
-			break;
-		case SPACE:
-			if ((double)x == floor(now(0).x) && (double)y == floor(now(0).y))
-			printf("X");
-			else
-			printf(" ");
-			break;
-		case NONE:
-			if ((double)x == floor(now(0).x) && (double)y == floor(now(0).y))
-			printf(".");
-			break;
-		
-		default:
-		TESTn(map(x,y,0)) STOP
-			break;
-		}
-		fflush(stdout);
-	}
-		printf("\n");
-	}
-TESTd(now(0).x);
-TESTd(now(0).y);
-TESTd(now(0).r);
-TESTd(xc)
-TESTd(yc)
-TESTd(rc)
-TESTd(rr)
-
-printf("\033[%zuA" ,y + 7);
-printf("\033[%zuD" ,x);
-}
-
-
 		n.r -= SEE / DIS_W;
 		i++;
 	}
@@ -455,9 +372,6 @@ void cast_line(t_now *n, t_line *l)
 	t_f fy;
 	
 	cast_line_init(n->r, &fx, &fy);
-//TESTd(now(0).x)
-//TESTd(now(0).y)
-//TESTd(n->r)
 	if (n->r < 0.5)
 		cast_line1(l, &fx, &fy);
 	else if (n->r < 1.0)
@@ -480,7 +394,6 @@ void cast_line_init(double r, t_f *fx, t_f *fy)
 
 void cast_line1(t_line *l, t_f *fx, t_f *fy)
 {
-//TEST_
 	size_t x;
 	size_t y;
 	double rx;
@@ -509,7 +422,6 @@ void cast_line1(t_line *l, t_f *fx, t_f *fy)
 
 void cast_line2(t_line *l, t_f *fx, t_f *fy)
 {
-//TEST_
 	size_t x;
 	size_t y;
 	double rx;
@@ -538,7 +450,6 @@ void cast_line2(t_line *l, t_f *fx, t_f *fy)
 
 void cast_line3(t_line *l, t_f *fx, t_f *fy)
 {
-//TEST_
 	size_t x;
 	size_t y;
 	double rx;
@@ -567,7 +478,6 @@ void cast_line3(t_line *l, t_f *fx, t_f *fy)
 
 void cast_line4(t_line *l, t_f *fx, t_f *fy)
 {
-//TEST_
 	size_t x;
 	size_t y;
 	double rx;
@@ -596,69 +506,45 @@ void cast_line4(t_line *l, t_f *fx, t_f *fy)
 
 void cast_line_retW(double rx, double ry, t_line *l)
 {
-//TEST
-www.x = rx;
-www.y = ry;
 	double dx;
 	double dy;
 
 	dx = now(0).x - rx;
 	dy = now(0).y - ry;
 	l->far = sqrt(dx * dx + dy * dy);
-//TESTd(ry)
-//TESTd(floor((floor(ry) + 1 - ry) * BL))
-//TESTn((size_t)floor((floor(ry) + 1 - ry) * BL))
 	img(WEST, floor((floor(ry) + 1 - ry) * BL), l->data);
 }
 
 void cast_line_retN(double rx, double ry, t_line *l)
 {
-//TEST
-www.x = rx;
-www.y = ry;
 	double dx;
 	double dy;
 
 	dx = now(0).x - rx;
 	dy = now(0).y - ry;
 	l->far = sqrt(dx * dx + dy * dy);
-//TESTd(rx)
-//TESTd(floor((rx - floor(rx)) * BL))
-//TESTn((size_t)floor((rx - floor(rx)) * BL))
 	img(NORTH, floor((floor(rx) + 1 - rx) * BL), l->data);
 }
 
 void cast_line_retE(double rx, double ry, t_line *l)
 {
-//TEST
-www.x = rx;
-www.y = ry;
 	double dx;
 	double dy;
 
 	dx = now(0).x - rx;
 	dy = now(0).y - ry;
 	l->far = sqrt(dx * dx + dy * dy);
-//TESTd(ry)
-//TESTd(floor((ry - floor(ry)) * BL))
-//TESTn((size_t)floor((ry - floor(ry)) * BL))
 	img(EAST, floor((ry - floor(ry)) * BL), l->data);
 }
 
 void cast_line_retS(double rx, double ry, t_line *l)
 {
-//TEST
-www.x = rx;
-www.y = ry;
 	double dx;
 	double dy;
 
 	dx = now(0).x - rx;
 	dy = now(0).y - ry;
 	l->far = sqrt(dx * dx + dy * dy);
-//TESTd(rx)
-//TESTd(floor((floor(rx) + 1 - rx) * BL))
-//TESTn((size_t)floor((floor(rx) + 1 - rx) * BL))
 	img(SOUTH, floor((rx - floor(rx)) * BL), l->data);
 }
 
@@ -676,7 +562,7 @@ void	dis_line(t_line *l, size_t i)
 	{
 		if (y >= 0)
 		{
-			dis(i, d, l->data[(int)floor(y)], CLOR);/* floor(y)がどこかおかしい */
+			dis(i, d, l->data[(int)floor(y)], CLOR);
 			y -= pic_l;
 		}
 		else
