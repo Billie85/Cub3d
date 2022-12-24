@@ -6,7 +6,7 @@
 /*   By: blyu <blyu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 05:41:07 by blyu              #+#    #+#             */
-/*   Updated: 2022/12/25 05:56:03 by blyu             ###   ########.fr       */
+/*   Updated: 2022/12/25 07:13:15 by blyu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	main(int argc, char *argv[])
 	|| ft_memcmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4))
 		return (printf("Error\n") * 0 + 1);
 	mlx(mlx_init());
-	win(mlx_new_window(mlx(0), DIS_W, DIS_H, "cub3d"));
+	win(mlx_new_window(mlx(0), DIS_W, DIS_H, "cub3D"));
 	if (set_head(argv[1]) || set_map(argv[1]))
 	{
-		printf ("ERROR\n");
+		printf ("Error\n");
 		return (1);
 	}
 	dis(0, 0, 0, SET);

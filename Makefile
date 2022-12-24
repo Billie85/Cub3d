@@ -1,4 +1,4 @@
-NAME		= cub3d
+NAME		= cub3D
 SRCS		=	srcs/main.c srcs/event.c srcs/tool.c \
 				srcs/set_head/img_mame.c srcs/set_head/set_head.c srcs/set_head/set_img_cf.c \
 				srcs/cub3d/cast_line.c srcs/cub3d/cast_line1.c srcs/cub3d/cast_line2.c srcs/cub3d/cub3d.c srcs/cub3d/dis_line.c \
